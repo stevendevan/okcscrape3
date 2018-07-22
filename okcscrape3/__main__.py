@@ -11,8 +11,7 @@ import configparser
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
-from . import find
-import ipdb; ipdb.set_trace()  # breakpoint d4eb54b0 //
+from . import functions
 
 
 def main():
@@ -23,10 +22,16 @@ def main():
 
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
-    parser.add_argument(
-        '--driver-path', help='Specify the path of the webdriver.')
+    parser.add_argument('--webdriver-path', type=str,
+                        default=configs['global']['webdriver_path'],
+                        help='Specify the path of the webdriver.')
     parser.add_argument('--base-url', type=str,
-                        default=configs['global']['BASE_URL'], help='TODO')
+                        default=configs['global']['base_url'], help='TODO')
+    parser.add_argument('--time-between-queries', type=int,
+                        default=configs['global']['time_between_queries'],
+                        help='TODO')
+    parser.add_argument('--save-configs', type=bool,
+                        action='store_true', help='TODO')
 
     parser_find = subparsers.add_parser('find', help='Run find.')
     parser_find.add_argument('--outfile', help='Name of outfile.')
@@ -34,11 +39,22 @@ def main():
     parser_fetch = subparsers.add_parser('fetch', help='Run fetch.')
     parser_fetch.add_argument('--cookie-file', help='File containing cookies.')
 
-    args = parser.parse_args()
+    args_obj = parser.parse_args()
 
     #
 
-    find.find(args.base_url)
+    if args_obj.find:
+        functions.find(args_obj)
+    elif args_obj.fetch:
+        functions.fetch(args_obj)
+
+    if args_obj.save_configs:
+        for section in configs.sections():
+            for key, value in configs[section].items():
+                configs.set(section, key, value)
+
+        with open('config.ini', 'w') as f:
+            configs.write(f)
 
 
 if __name__ == '__main__':
