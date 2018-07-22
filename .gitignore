@@ -1,3 +1,7 @@
-clarg_structure.txt
-okcscrape3.egg-info/**
-okcscrape3/__pycache__/**
+*
+!.gitignore
+!setup.py
+!okcscrape3/__init__.py
+!okcscrape3/__main__.py
+!okcscrape3/config.ini
+!okcscrape3/fuctions.py
