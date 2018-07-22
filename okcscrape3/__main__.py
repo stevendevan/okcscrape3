@@ -17,8 +17,9 @@ from . import functions
 def main():
 
     # Parse config.ini
+    dirname = os.path.dirname(__file__)
     configs = configparser.ConfigParser()
-    configs.read('config.ini')
+    configs.read(os.path.join(dirname, 'config.ini'))
 
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
@@ -30,8 +31,10 @@ def main():
     parser.add_argument('--time-between-queries', type=int,
                         default=configs['global']['time_between_queries'],
                         help='TODO')
-    parser.add_argument('--save-configs', type=bool,
-                        action='store_true', help='TODO')
+    parser.add_argument('--max-query-attempts', type=int,
+                        default=configs['global']['max_query_attempts'],
+                        help='TODO')
+    parser.add_argument('--save-configs', action='store_true', help='TODO')
 
     parser_find = subparsers.add_parser('find', help='Run find.')
     parser_find.add_argument('--outfile', help='Name of outfile.')
