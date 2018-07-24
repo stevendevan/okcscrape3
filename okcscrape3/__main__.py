@@ -23,10 +23,10 @@ def main():
 
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
-    parser.add_argument('--webdriver-path', type=str,
+    parser.add_argument('--webdriver-path',
                         default=configs['global']['webdriver_path'],
                         help='Specify the path of the webdriver.')
-    parser.add_argument('--base-url', type=str,
+    parser.add_argument('--base-url',
                         default=configs['global']['base_url'], help='TODO')
     parser.add_argument('--time-between-queries', type=int,
                         default=configs['global']['time_between_queries'],
@@ -34,13 +34,28 @@ def main():
     parser.add_argument('--max-query-attempts', type=int,
                         default=configs['global']['max_query_attempts'],
                         help='TODO')
-    parser.add_argument('--save-configs', action='store_true', help='TODO')
+    parser.add_argument('--no-save-configs', action='store_false',
+                        default=True, dest='save_configs', help='TODO')
 
     parser_find = subparsers.add_parser('find', help='Run find.')
-    parser_find.add_argument('--outfile', help='Name of outfile.')
+    parser_find.add_argument('--match-url-suffix',
+                             default=configs['findusers']['match_url_suffix'],
+                             help='TODO')
+    parser_find.add_argument('--outfile',
+                             default=configs['findusers']['usernames_outfile'],
+                             help='Name of outfile.')
+    parser_find.add_argument('--num-usernames',
+                             default=configs['findusers']['nume_usernames'],
+                             help='TODO')
 
     parser_fetch = subparsers.add_parser('fetch', help='Run fetch.')
     parser_fetch.add_argument('--cookie-file', help='File containing cookies.')
+    parser_fetch.add_argument('--outfile',
+                              default=configs['fetchusers']['profiles_outfile'],
+                              help='TODO')
+    parser_fetch.add_argument('--num-profiles',
+                              default=configs['fetchusers']['num_profiles'],
+                              help='TODO')
 
     args_obj = parser.parse_args()
 
