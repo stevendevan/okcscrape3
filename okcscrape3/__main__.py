@@ -18,8 +18,9 @@ def main():
 
     # Parse config.ini
     dirname = os.path.dirname(__file__)
+    config_path = os.path.join(dirname, 'config.ini')
     configs = configparser.ConfigParser()
-    configs.read(os.path.join(dirname, 'config.ini'))
+    configs.read(config_path)
 
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='subroutine')
@@ -57,23 +58,29 @@ def main():
                               default=configs['fetchusers']['num_profiles'],
                               help='TODO')
 
+    parser_print = subparsers.add_parser('print-config',
+                                         help='Print contents of config file.')
+
     # vars() because we need to be able to access the contents like obj[str]
     args_obj = vars(parser.parse_args())
 
     #
 
+    if args_obj['save_configs']:
+        for section in configs.sections():
+            for key in configs[section].keys():
+                if key in args_obj.keys():
+                    configs.set(section, key, str(args_obj[key]))
+
+        with open(config_path, 'w') as f:
+            configs.write(f)
+
     if args_obj['subroutine'] == 'findusers':
         functions.findusers(args_obj)
     elif args_obj['subroutine'] == 'fetchusers':
         functions.fetchusers(args_obj)
-
-    if args_obj['save_configs']:
-        for section in configs.sections():
-            for key, value in configs[section].items():
-                configs.set(section, key, value)
-
-        with open('config.ini', 'w') as f:
-            configs.write(f)
+    elif args_obj['subroutine'] == 'print-config':
+        functions.print_config(configs)
 
 
 if __name__ == '__main__':
