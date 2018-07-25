@@ -17,8 +17,7 @@ from . import functions
 def main():
 
     # Parse config.ini
-    dirname = os.path.dirname(__file__)
-    config_path = os.path.join(dirname, 'config.ini')
+    config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
     configs = configparser.ConfigParser()
     configs.read(config_path)
 
@@ -63,7 +62,7 @@ def main():
 
     # vars() because we need to be able to access the contents like obj[str]
     args_obj = vars(parser.parse_args())
-
+    
     #
 
     if args_obj['save_configs']:
