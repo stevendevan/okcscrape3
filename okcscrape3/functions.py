@@ -1,4 +1,5 @@
 import configparser
+import regex
 import os
 
 from bs4 import BeautifulSoup
@@ -8,14 +9,17 @@ from selenium import webdriver
 
 def findusers(args_obj: dict) -> None:
     print('Run find.')
-    webdriver_path = os.path.join(os.path.dirname(__file__),
-                                  args_obj['webdriver_path'])
+    homedir = os.path.dirname(__file__)
+    webdriver_path = os.path.join(homedir, args_obj['webdriver_path'])
     browser = webdriver.Chrome(executable_path=webdriver_path)
 
     url = args_obj['base_url'] + \
         args_obj['match_url_suffix']
 
     html = get_webpage(browser, url, args_obj)
+    usernames_list = extract_usernames_from_html(html)
+    import ipdb; ipdb.set_trace()  # breakpoint b83abd5a //
+
 
 
 def fetchusers(args_obj):
@@ -31,6 +35,8 @@ def print_config(configs: configparser.ConfigParser) -> None:
 
 
 def get_webpage(browser, url, args_obj):
+    """TODO
+    """
     # Look into returning page after a set amount of time.
     # Some unnecessary elements take a long time to fully load.
 
@@ -47,3 +53,17 @@ def get_webpage(browser, url, args_obj):
             break
 
     return browser.page_source
+
+
+def extract_usernames_from_html(html: str) -> list:
+    """TODO
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+    match_cards = soup.find_all(name='div',
+                                attrs={'class': 'match_card_wrapper ' +
+                                       'user-not-hidden matchcard-user'})
+    usernames = []
+    for match_card in match_cards:
+        usernames.append(match_card['data-userid'])
+
+    return usernames
