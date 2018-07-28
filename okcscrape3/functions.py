@@ -52,7 +52,7 @@ def findusers(args_obj: dict) -> None:
                 #       write to csv
                 data_to_write = [username,
                                  0,
-                                 datetime.datetime.now().strftime(r'%Y/%m/%d')]
+                                 datetime.datetime.now().strftime(r'%Y%m%d')]
                 with open(usernames_path, 'a') as f:
                     writer_obj = csv.writer(f, lineterminator='\n')
                     writer_obj.writerow(data_to_write)
