@@ -20,8 +20,6 @@ def findusers(args_obj: dict) -> None:
     usernames_path = os.path.join(homedir, args_obj['outfile'])
     webdriver_path = os.path.join(homedir, args_obj['webdriver_path'])
 
-    # Get dict from csv
-    # Get list of profiles from dict
     try:
         usernames_df = pd.read_csv(usernames_path, dtype={'profile': str})
         usernames_list = usernames_df['profile'].values
@@ -34,54 +32,30 @@ def findusers(args_obj: dict) -> None:
     browser = webdriver.Chrome(executable_path=webdriver_path)
     url = args_obj['base_url'] + args_obj['match_url_suffix']
 
-    #usernames_list = []
-    #num_existing_users = len(usernames_df['profile'].values)
     num_found_users = 0
-    # While counter of new profiles < num_usernames
-
     while num_found_users < args_obj['num_usernames']:
         time.sleep(args_obj['time_between_queries'])
         html = get_webpage(browser, url, args_obj)
         usernames_new = extract_usernames_from_html(html)
 
-        # for username in new usernames
         for username in usernames_new:
-            #   check if it's in the list of profiles
             if username not in usernames_list:
-                #   if not:
-                #       write to csv
                 data_to_write = [username,
                                  0,
                                  datetime.datetime.now().strftime(r'%Y%m%d')]
+
                 with open(usernames_path, 'a') as f:
                     writer_obj = csv.writer(f, lineterminator='\n')
                     writer_obj.writerow(data_to_write)
-        #       add to list of profiles
+
                 usernames_list += username
-        #       increment counter of new unique profiles
                 num_found_users += 1
-        #       if counter == num_usernames
-        #           break
+
                 if num_found_users == args_obj['num_usernames']:
                     break
 
-        # Maybe turn this into a private function for clarity
-        #num_found_users = len(set(list(usernames_df['profile'].values) +
-        #                          usernames_list)) - \
-        #    num_existing_users
-
         print('{}/{} usernames found'
               .format(num_found_users, args_obj['num_usernames']))
-
-    #usernames_df_new = pd.DataFrame(
-    #    {'profile': usernames_list[0:args_obj['num_usernames']],
-    #     'profile_fetched': np.zeros(args_obj['num_usernames'], dtype=int),
-    #     'date_found': [datetime.datetime.now().strftime(r'%Y/%m/%d')] *
-    #     args_obj['num_usernames']})
-#
-    #usernames_df = pd.concat([usernames_df, usernames_df_new], axis=0)
-    #usernames_df.drop_duplicates(subset='profile', keep='first', inplace=True)
-    #usernames_df.to_csv(path_or_buf=usernames_path, index=False)
 
 
 def fetchusers(args_obj):
