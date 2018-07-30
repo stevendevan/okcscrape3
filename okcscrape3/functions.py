@@ -26,6 +26,10 @@ def findusers(args_obj: dict) -> None:
     except FileNotFoundError:
         print('file "{}" does not exist, but it soon shall.'
               .format(args_obj['outfile']))
+        with open(usernames_path, 'w') as f:
+            writer_obj = csv.writer(f, lineterminator='\n')
+            writer_obj.writerow(['username', 'profile_fetched', 'date_logged'])
+
         usernames_list = []
 
     # Once encountered a WebDriverException here, caused freeze
@@ -34,15 +38,16 @@ def findusers(args_obj: dict) -> None:
 
     num_found_users = 0
     while num_found_users < args_obj['num_usernames']:
+
+        current_day = datetime.datetime.now().strftime(r'%Y%m%d')
+        # Maybe async sleep with the rest of the loop operations?
         time.sleep(args_obj['time_between_queries'])
         html = get_webpage(browser, url, args_obj)
         usernames_new = extract_usernames_from_html(html)
 
         for username in usernames_new:
             if username not in usernames_list:
-                data_to_write = [username,
-                                 0,
-                                 datetime.datetime.now().strftime(r'%Y%m%d')]
+                data_to_write = [username, 0, current_day]
 
                 with open(usernames_path, 'a') as f:
                     writer_obj = csv.writer(f, lineterminator='\n')
