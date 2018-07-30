@@ -21,8 +21,8 @@ def findusers(args_obj: dict) -> None:
     webdriver_path = os.path.join(homedir, args_obj['webdriver_path'])
 
     try:
-        usernames_df = pd.read_csv(usernames_path, dtype={'profile': str})
-        usernames_list = usernames_df['profile'].values
+        usernames_df = pd.read_csv(usernames_path, dtype={'username': str})
+        usernames_list = usernames_df['username'].values
     except FileNotFoundError:
         print('file "{}" does not exist, but it soon shall.'
               .format(args_obj['outfile']))
@@ -78,7 +78,9 @@ def print_config(configs: configparser.ConfigParser) -> None:
 # Internal functions?
 
 
-def get_webpage(browser, url, args_obj):
+def get_webpage(browser: selenium.webdriver.Chrome,
+                url: str,
+                args_obj: dict) -> str:
     """TODO
     """
     # Look into returning page after a set amount of time.
