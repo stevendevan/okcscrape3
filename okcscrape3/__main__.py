@@ -45,6 +45,7 @@ def main():
                              default=configs['findusers']['usernames_outfile'],
                              help='Name of outfile.')
     parser_find.add_argument('--num-usernames',
+                             type=int,
                              default=configs['findusers']['num_usernames'],
                              help='TODO')
 
@@ -62,7 +63,7 @@ def main():
 
     # vars() because we need to be able to access the contents like obj[str]
     args_obj = vars(parser.parse_args())
-    
+
     #
 
     if args_obj['save_configs']:
