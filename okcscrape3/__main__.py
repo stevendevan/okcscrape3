@@ -4,12 +4,8 @@
 """
 
 import os
-import csv
 import argparse
 import configparser
-
-from bs4 import BeautifulSoup
-from selenium import webdriver
 
 from . import functions
 

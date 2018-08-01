@@ -6,7 +6,6 @@ import time
 import os  # pathlib also an option to consider
 
 from bs4 import BeautifulSoup
-import numpy as np
 import pandas as pd
 import selenium
 from selenium import webdriver
@@ -16,7 +15,7 @@ def findusers(args_obj: dict) -> None:
     """Find usernames from OKCupid and log them in a csv.
     """
 
-    """Improvement ideas
+    """Improvement ideas:
     1.  Might need a try block for webdriver object creation.
         Once encountered a WebDriverException, which caused a freeze.
     2.  Perform rest of page parsing asynchronously with sleep timer.
@@ -103,7 +102,7 @@ def get_webpage(browser: selenium.webdriver.Chrome,
     """Use selenium webdriver to fetch a webpage and return the html.
     """
 
-    """Improvement ideas
+    """Improvement ideas:
     1.  Look into returning page after a set amount of time.
         Some unnecessary elements take a long time to fully load.
         Would likely require args in browser obj creation or in get() function.
