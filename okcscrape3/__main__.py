@@ -9,12 +9,17 @@ import configparser
 
 from . import functions
 
+"""Improvement ideas:
+1.  Separate each primary function into its own file, along with a
+    'global functions' file or something similar.
+"""
+
 
 def main():
 
     # Parse config.ini
-    config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
     configs = configparser.ConfigParser()
+    config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
     configs.read(config_path)
 
     parser = argparse.ArgumentParser()
