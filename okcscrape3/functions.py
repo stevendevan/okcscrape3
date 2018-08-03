@@ -30,9 +30,11 @@ def findusers(args_obj: dict) -> None:
     webdriver_path = os.path.join(homedir, args_obj['webdriver_path'])
 
     try:
+        # Using pandas because it's simple. May be slower than csv module.
         usernames_df = pd.read_csv(usernames_path, dtype={'username': str})
         usernames_list = usernames_df['username'].values
     except FileNotFoundError:
+        # Initialize csv with headers
         print('file "{}" does not exist, but it soon shall.'
               .format(args_obj['outfile']))
         with open(usernames_path, 'w') as f:
@@ -61,8 +63,9 @@ def findusers(args_obj: dict) -> None:
 
         for username in usernames_new:
             if username not in usernames_list:
-                data_to_write = [username, 0, current_day]
+                data_to_write = [username, 0, current_day]  # 0 is bool flag
 
+                # Incremental write in case of exception
                 with open(usernames_path, 'a') as f:
                     writer_obj = csv.writer(f, lineterminator='\n')
                     writer_obj.writerow(data_to_write)
