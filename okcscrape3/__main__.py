@@ -44,6 +44,7 @@ def main():
                              help='TODO')
     parser_find.add_argument('--outfile',
                              default=configs['findusers']['usernames_outfile'],
+                             dest='usernames_outfile',
                              help='Name of outfile.')
     parser_find.add_argument('--num-usernames',
                              type=int,
@@ -51,9 +52,12 @@ def main():
                              help='TODO')
 
     parser_fetch = subparsers.add_parser('fetchusers', help='Run fetch.')
-    parser_fetch.add_argument('--cookie-file', help='File containing cookies.')
+    parser_fetch.add_argument('--cookies-file',
+                              default=configs['fetchusers']['cookies_file'],
+                              help='File containing cookies.')
     parser_fetch.add_argument('--outfile',
                               default=configs['fetchusers']['profiles_outfile'],
+                              dest='profiles_outfile',
                               help='TODO')
     parser_fetch.add_argument('--num-profiles',
                               default=configs['fetchusers']['num_profiles'],
@@ -64,10 +68,14 @@ def main():
 
     # vars() because we need to be able to access the contents like obj[str]
     args_obj = vars(parser.parse_args())
-
+    webdriver_path = args_obj['webdriver_path']
+    base_url = args_obj['base_url']
+    time_between_queries = args_obj['time_between_queries']
+    max_query_attempts = args_obj['max_query_attempts']
+    save_configs = args_obj['save_configs']
     #
 
-    if args_obj['save_configs']:
+    if save_configs:
         for section in configs.sections():
             for key in configs[section].keys():
                 if key in args_obj.keys():
@@ -77,8 +85,25 @@ def main():
             configs.write(f)
 
     if args_obj['subroutine'] == 'findusers':
-        functions.findusers(args_obj)
+
+        match_url_suffix = args_obj['match_url_suffix']
+        usernames_outfile = args_obj['usernames_outfile']
+        num_usernames = args_obj['num_usernames']
+
+        functions.findusers(webdriver_path=webdriver_path,
+                            base_url=base_url,
+                            match_url_suffix=match_url_suffix,
+                            usernames_outfile=usernames_outfile,
+                            num_usernames=num_usernames,
+                            time_between_queries=time_between_queries,
+                            max_query_attempts=max_query_attempts,
+                            )
     elif args_obj['subroutine'] == 'fetchusers':
+
+        cookies_file = args_obj['cookies_file']
+        profiles_outfile = ['profiles_outfile']
+        num_profiles = args_obj['num_profiles']
+
         functions.fetchusers(args_obj)
     elif args_obj['subroutine'] == 'print-config':
         functions.print_config(configs)
