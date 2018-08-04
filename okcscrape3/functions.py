@@ -12,6 +12,13 @@ from selenium import webdriver
 
 
 def findusers(args_obj: dict) -> None:
+    """ def findusers(outfile: str,
+                      webdriver_path: str,
+                      base_url: str,
+                      match_url_suffix: str,
+                      num_usernames: int,
+                      time_between_queries: int) -> None:
+    """
     """Find usernames from OKCupid and log them in a csv.
     """
 
@@ -24,10 +31,18 @@ def findusers(args_obj: dict) -> None:
     3.  Have the csv header labels read from somewhere, as opposed to being
         hard-coded.
     """
-    print('Run find.')
+    print('Running findusers:')
+
+    outfile = args_obj['outfile']
+    webdriver_path = args_obj['webdriver_path']
+    base_url = args_obj['base_url']
+    match_url_suffix = args_obj['match_url_suffix']
+    num_usernames = args_obj['num_usernames']
+    time_between_queries = args_obj['time_between_queries']
+
     homedir = os.path.dirname(__file__)
-    usernames_path = os.path.join(homedir, args_obj['outfile'])
-    webdriver_path = os.path.join(homedir, args_obj['webdriver_path'])
+    usernames_path = os.path.join(homedir, outfile)
+    webdriver_path = os.path.join(homedir, webdriver_path)
 
     try:
         # Using pandas because it's simple. May be slower than csv module.
@@ -36,7 +51,7 @@ def findusers(args_obj: dict) -> None:
     except FileNotFoundError:
         # Initialize csv with headers
         print('file "{}" does not exist, but it soon shall.'
-              .format(args_obj['outfile']))
+              .format(outfile))
         with open(usernames_path, 'w') as f:
             writer_obj = csv.writer(f, lineterminator='\n')
             # [3]
@@ -45,13 +60,13 @@ def findusers(args_obj: dict) -> None:
         usernames_list = []
 
     browser = webdriver.Chrome(executable_path=webdriver_path)  # [1]
-    url = args_obj['base_url'] + args_obj['match_url_suffix']
+    url = base_url + match_url_suffix
 
     num_found_users = 0
-    while num_found_users < args_obj['num_usernames']:
+    while num_found_users < num_usernames:
 
         # Sleep required to avoid blacklisting/throttling by OKCupid servers.
-        time.sleep(args_obj['time_between_queries'])
+        time.sleep(time_between_queries)
 
         # [2] (applies to rest of while-loop)
         html = get_webpage(browser, url, args_obj)
@@ -73,11 +88,11 @@ def findusers(args_obj: dict) -> None:
                 usernames_list += username
                 num_found_users += 1
 
-                if num_found_users == args_obj['num_usernames']:
+                if num_found_users == num_usernames:
                     break
 
         print('{}/{} usernames found'
-              .format(num_found_users, args_obj['num_usernames']))
+              .format(num_found_users, num_usernames))
 
 
 def fetchusers(args_obj):
