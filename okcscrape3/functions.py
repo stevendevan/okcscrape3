@@ -56,6 +56,7 @@ def findusers(usernames_outfile: str,
     url = base_url + match_url_suffix
 
     num_found_users = 0
+    profile_fetched = 0  # We are just now logging them so always false
     while num_found_users < num_usernames:
 
         # Sleep required to avoid blacklisting/throttling by OKCupid servers.
@@ -71,7 +72,7 @@ def findusers(usernames_outfile: str,
 
         for username in usernames_new:
             if username not in usernames_list:
-                data_to_write = [username, 0, current_day]  # 0 is bool flag
+                data_to_write = [username, profile_fetched, current_day]
 
                 # Incremental write in case of exception
                 with open(usernames_path, 'a') as f:
