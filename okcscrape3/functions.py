@@ -11,14 +11,14 @@ import selenium
 from selenium import webdriver
 
 
-def findusers(args_obj: dict) -> None:
-    """ def findusers(outfile: str,
-                      webdriver_path: str,
-                      base_url: str,
-                      match_url_suffix: str,
-                      num_usernames: int,
-                      time_between_queries: int) -> None:
-    """
+# def findusers(args_obj: dict) -> None:
+def findusers(usernames_outfile: str,
+              webdriver_path: str,
+              base_url: str,
+              match_url_suffix: str,
+              num_usernames: int,
+              time_between_queries: int,
+              max_query_attempts: int) -> None:
     """Find usernames from OKCupid and log them in a csv.
     """
 
@@ -33,15 +33,8 @@ def findusers(args_obj: dict) -> None:
     """
     print('Running findusers:')
 
-    outfile = args_obj['outfile']
-    webdriver_path = args_obj['webdriver_path']
-    base_url = args_obj['base_url']
-    match_url_suffix = args_obj['match_url_suffix']
-    num_usernames = args_obj['num_usernames']
-    time_between_queries = args_obj['time_between_queries']
-
     homedir = os.path.dirname(__file__)
-    usernames_path = os.path.join(homedir, outfile)
+    usernames_path = os.path.join(homedir, usernames_outfile)
     webdriver_path = os.path.join(homedir, webdriver_path)
 
     try:
@@ -51,7 +44,7 @@ def findusers(args_obj: dict) -> None:
     except FileNotFoundError:
         # Initialize csv with headers
         print('file "{}" does not exist, but it soon shall.'
-              .format(outfile))
+              .format(usernames_outfile))
         with open(usernames_path, 'w') as f:
             writer_obj = csv.writer(f, lineterminator='\n')
             # [3]
@@ -69,7 +62,7 @@ def findusers(args_obj: dict) -> None:
         time.sleep(time_between_queries)
 
         # [2] (applies to rest of while-loop)
-        html = get_webpage(browser, url, args_obj)
+        html = get_webpage(browser, url, max_query_attempts)
         usernames_new = extract_usernames_from_html(html)
 
         # For csv entry. Best to have this inside the while loop in case the
@@ -116,7 +109,7 @@ def print_config(configs: configparser.ConfigParser) -> None:
 
 def get_webpage(browser: selenium.webdriver.Chrome,
                 url: str,
-                args_obj: dict) -> str:
+                max_query_attempts: int) -> str:
     """Use selenium webdriver to fetch a webpage and return the html.
     """
 
@@ -126,12 +119,11 @@ def get_webpage(browser: selenium.webdriver.Chrome,
         Would likely require args in browser obj creation or in get() function.
     """
 
-    max_attempts = args_obj['max_query_attempts']
-    for attempt in range(max_attempts):
+    for attempt in range(max_query_attempts):
         try:
             browser.get(url)  # [1]
         except selenium.common.exceptions.TimeoutException as e:
-            if attempt < max_attempts:
+            if attempt < max_query_attempts:
                 continue
             else:
                 raise
