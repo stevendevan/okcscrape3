@@ -90,12 +90,6 @@ def findusers(usernames_outfile: str,
               .format(num_found_users, num_usernames))
 
 
-def fetchusers(args_obj):
-    """TODO (docstring)
-    """
-    print('Run fetch.')
-
-
 def print_config(configs: configparser.ConfigParser) -> None:
     """Print all parameters in the config.ini file in a readable format.
     """
