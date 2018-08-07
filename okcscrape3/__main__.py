@@ -106,7 +106,8 @@ def main():
         profiles_outfile = ['profiles_outfile']
         num_profiles = args_obj['num_profiles']
 
-        functions.fetchusers(args_obj)
+        fetchusers()
+
     elif args_obj['subroutine'] == 'print-config':
         print_config(configs)
 
