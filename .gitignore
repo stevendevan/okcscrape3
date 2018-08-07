@@ -1,6 +1,7 @@
-*
+**
 !.gitignore
 !setup.py
+!okcscrape3
 !okcscrape3/__init__.py
 !okcscrape3/__main__.py
 !okcscrape3/config.ini
