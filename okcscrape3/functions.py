@@ -10,6 +10,8 @@ import pandas as pd
 import selenium
 from selenium import webdriver
 
+from okcscrape3 import util
+
 
 # def findusers(args_obj: dict) -> None:
 def findusers(usernames_outfile: str,
@@ -63,7 +65,7 @@ def findusers(usernames_outfile: str,
         time.sleep(time_between_queries)
 
         # [2] (applies to rest of while-loop)
-        html = get_webpage(browser, url, max_query_attempts)
+        html = util.get_webpage(browser, url, max_query_attempts)
         usernames_new = extract_usernames_from_html(html)
 
         # For csv entry. Best to have this inside the while loop in case the
