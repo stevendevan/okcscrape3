@@ -9,6 +9,7 @@ import configparser
 
 from okcscrape3.fetchusers import fetchusers
 from okcscrape3.functions import findusers
+from okcscrape3.print_config import print_config
 
 """Improvement ideas:
 1.  Separate each primary function into its own file, along with a
@@ -107,7 +108,7 @@ def main():
 
         functions.fetchusers(args_obj)
     elif args_obj['subroutine'] == 'print-config':
-        functions.print_config(configs)
+        print_config(configs)
 
 
 if __name__ == '__main__':
