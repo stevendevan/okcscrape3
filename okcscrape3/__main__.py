@@ -8,7 +8,7 @@ import argparse
 import configparser
 
 from okcscrape3.fetchusers import fetchusers
-from okcscrape3.functions import findusers
+from okcscrape3.findusers import findusers
 from okcscrape3.print_config import print_config
 
 """Improvement ideas:
@@ -70,21 +70,16 @@ def main():
 
     # vars() because we need to be able to access the contents like obj[str]
     args_obj = vars(parser.parse_args())
+
+    # Global params
     webdriver_path = args_obj['webdriver_path']
     base_url = args_obj['base_url']
     time_between_queries = args_obj['time_between_queries']
     max_query_attempts = args_obj['max_query_attempts']
     save_configs = args_obj['save_configs']
-    #
 
     if save_configs:
-        for section in configs.sections():
-            for key in configs[section].keys():
-                if key in args_obj.keys():
-                    configs.set(section, key, str(args_obj[key]))
-
-        with open(config_path, 'w') as f:
-            configs.write(f)
+        _save_configs(configs, config_path, args_obj)
 
     if args_obj['subroutine'] == 'findusers':
 
@@ -110,6 +105,20 @@ def main():
 
     elif args_obj['subroutine'] == 'print-config':
         print_config(configs)
+
+
+def _save_configs(configs: configparser.ConfigParser,
+                  config_path: str,
+                  args_obj: argparse.ArgumentParser) -> None:
+    """Save the current configs in the .ini file.
+    """
+    for section in configs.sections():
+        for key in configs[section].keys():
+            if key in args_obj.keys():
+                configs.set(section, key, str(args_obj[key]))
+
+    with open(config_path, 'w') as f:
+        configs.write(f)
 
 
 if __name__ == '__main__':
