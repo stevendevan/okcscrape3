@@ -1,7 +1,5 @@
-import configparser
 import csv
 import datetime
-import regex
 import time
 import os  # pathlib also an option to consider
 
