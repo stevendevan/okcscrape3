@@ -7,7 +7,8 @@ import os
 import argparse
 import configparser
 
-from . import functions
+from okcscrape3.fetchusers import fetchusers
+from okcscrape3.functions import findusers
 
 """Improvement ideas:
 1.  Separate each primary function into its own file, along with a
@@ -90,14 +91,14 @@ def main():
         usernames_outfile = args_obj['usernames_outfile']
         num_usernames = args_obj['num_usernames']
 
-        functions.findusers(webdriver_path=webdriver_path,
-                            base_url=base_url,
-                            match_url_suffix=match_url_suffix,
-                            usernames_outfile=usernames_outfile,
-                            num_usernames=num_usernames,
-                            time_between_queries=time_between_queries,
-                            max_query_attempts=max_query_attempts,
-                            )
+        findusers(webdriver_path=webdriver_path,
+                  base_url=base_url,
+                  match_url_suffix=match_url_suffix,
+                  usernames_outfile=usernames_outfile,
+                  num_usernames=num_usernames,
+                  time_between_queries=time_between_queries,
+                  max_query_attempts=max_query_attempts,
+                  )
     elif args_obj['subroutine'] == 'fetchusers':
 
         cookies_file = args_obj['cookies_file']
