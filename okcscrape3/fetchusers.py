@@ -1,11 +1,16 @@
-#
+import csv
+import sys
+import os
 
 import pandas as pd
 
 from okcscrape3 import util
 
 
-def fetchusers():
+def fetchusers(pkg_root_path: str,
+               webdriver_path: str,
+               usernames_file: str,
+               profiles_outfile: str):
     print('Run fetchusers.')
     """Checklist
     1.  Read in usernames from usernames csv, get a list of ones that
@@ -25,3 +30,17 @@ def fetchusers():
             a.  append results to the specified csv
     7.  ??
     """
+
+    usernames_path = os.path.join(pkg_root_path, usernames_file)
+    profiles_path = os.path.join(pkg_root_path, profiles_outfile)
+    webdriver_path = os.path.join(pkg_root_path, webdriver_path)
+
+    try:
+        usernames_df = pd.read_csv(usernames_path)
+        # Usernames that have not had their profiles fetched yet
+        usernames_to_fetch = \
+            usernames_df[usernames_df['profile_fetched'] == 0] \
+            .loc[:, 'username']
+    except FileNotFoundError:
+        print('Could not find csv file "{}"'.format(usernames_path))
+        sys.exit()
