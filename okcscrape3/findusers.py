@@ -11,7 +11,8 @@ from okcscrape3 import util
 
 
 # def findusers(args_obj: dict) -> None:
-def findusers(usernames_outfile: str,
+def findusers(pkg_root_path: str,
+              usernames_outfile: str,
               webdriver_path: str,
               base_url: str,
               match_url_suffix: str,
@@ -32,9 +33,8 @@ def findusers(usernames_outfile: str,
     """
     print('Running findusers:')
 
-    homedir = os.path.dirname(__file__)
-    usernames_path = os.path.join(homedir, usernames_outfile)
-    webdriver_path = os.path.join(homedir, webdriver_path)
+    usernames_path = os.path.join(pkg_root_path, usernames_outfile)
+    webdriver_path = os.path.join(pkg_root_path, webdriver_path)
 
     try:
         # Using pandas because it's simple. May be slower than csv module.

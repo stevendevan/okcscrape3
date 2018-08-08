@@ -21,7 +21,8 @@ def main():
 
     # Parse config.ini
     configs = configparser.ConfigParser()
-    config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
+    pkg_root_path = os.path.dirname(__file__)
+    config_path = os.path.join(pkg_root_path, 'config.ini')
     configs.read(config_path)
 
     parser = argparse.ArgumentParser()
@@ -88,7 +89,8 @@ def main():
         usernames_outfile = args_obj['usernames_outfile']
         num_usernames = args_obj['num_usernames']
 
-        findusers(webdriver_path=webdriver_path,
+        findusers(pkg_root_path=pkg_root_path,
+                  webdriver_path=webdriver_path,
                   base_url=base_url,
                   match_url_suffix=match_url_suffix,
                   usernames_outfile=usernames_outfile,
