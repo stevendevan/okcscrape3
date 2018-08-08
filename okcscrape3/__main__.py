@@ -81,6 +81,7 @@ def main():
     if save_configs:
         _save_configs(configs, config_path, args_obj)
 
+    # # Main subroutine branching logic # #
     if args_obj['subroutine'] == 'findusers':
 
         match_url_suffix = args_obj['match_url_suffix']
@@ -109,7 +110,7 @@ def main():
 
 def _save_configs(configs: configparser.ConfigParser,
                   config_path: str,
-                  args_obj: argparse.ArgumentParser) -> None:
+                  args_obj: dict) -> None:
     """Save the current configs in the .ini file.
     """
     for section in configs.sections():
