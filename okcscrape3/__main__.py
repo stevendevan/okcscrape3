@@ -58,6 +58,10 @@ def main():
     parser_fetch.add_argument('--cookies-file',
                               default=configs['fetchusers']['cookies_file'],
                               help='File containing cookies.')
+    parser_fetch.add_argument('--usernames-file',
+                              default=configs['fetchusers']['usernames_file'],
+                              help=('File of usernames of profiles to be '
+                                    'fetched.'))
     parser_fetch.add_argument('--outfile',
                               default=configs['fetchusers']['profiles_outfile'],
                               dest='profiles_outfile',
@@ -101,10 +105,14 @@ def main():
     elif args_obj['subroutine'] == 'fetchusers':
 
         cookies_file = args_obj['cookies_file']
-        profiles_outfile = ['profiles_outfile']
+        usernames_file = args_obj['usernames_file']
+        profiles_outfile = args_obj['profiles_outfile']
         num_profiles = args_obj['num_profiles']
 
-        fetchusers()
+        fetchusers(pkg_root_path=pkg_root_path,
+                   webdriver_path=webdriver_path,
+                   usernames_file=usernames_file,
+                   profiles_outfile=profiles_outfile)
 
     elif args_obj['subroutine'] == 'print-config':
         print_config(configs)
