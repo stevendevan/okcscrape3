@@ -6,6 +6,8 @@
 import os
 import argparse
 import configparser
+import urllib
+import zipfile
 
 from okcscrape3.fetchusers import fetchusers
 from okcscrape3.findusers import findusers
@@ -18,7 +20,8 @@ from okcscrape3.print_config import print_config
 
 
 def main():
-
+    download_chrome_driver()
+        
     # Parse config.ini
     configs = configparser.ConfigParser()
     pkg_root_path = os.path.dirname(__file__)
@@ -131,6 +134,16 @@ def _save_configs(configs: configparser.ConfigParser,
     with open(config_path, 'w') as f:
         configs.write(f)
 
+def download_chrome_driver():
+    driverFileName = "chromedriver.exe"
+    zipFileName = "chromedriver.zip"
+
+    if False == os.path.isfile(driverFileName):
+        urllib.request.urlretrieve("https://chromedriver.storage.googleapis.com/2.41/chromedriver_win32.zip", zipFileName)
+        chromeDriverZip = zipfile.ZipFile(zipFileName, 'r')
+        chromeDriverZip.extractall("./")
+        chromeDriverZip.close()
+        os.remove(zipFileName)
 
 if __name__ == '__main__':
     main()
