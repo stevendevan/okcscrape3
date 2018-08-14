@@ -1,4 +1,4 @@
-#! python3
+#!  python3
 """
 @author: Steven Devan
 """
@@ -20,13 +20,14 @@ from okcscrape3.print_config import print_config
 
 
 def main():
-    download_chrome_driver()
         
     # Parse config.ini
     configs = configparser.ConfigParser()
     pkg_root_path = os.path.dirname(__file__)
     config_path = os.path.join(pkg_root_path, 'config.ini')
     configs.read(config_path)
+
+    download_chrome_driver(pkg_root_path)
 
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='subroutine')
@@ -89,6 +90,10 @@ def main():
     if save_configs:
         _save_configs(configs, config_path, args_obj)
 
+    data_path = pkg_root_path + "/data"
+    if False == os.path.exists(data_path):
+        os.makedirs(data_path)
+
     # # Main subroutine branching logic # #
     if args_obj['subroutine'] == 'findusers':
 
@@ -103,8 +108,7 @@ def main():
                   usernames_outfile=usernames_outfile,
                   num_usernames=num_usernames,
                   time_between_queries=time_between_queries,
-                  max_query_attempts=max_query_attempts,
-                  )
+                  max_query_attempts=max_query_attempts,)
     elif args_obj['subroutine'] == 'fetchusers':
 
         cookies_file = args_obj['cookies_file']
@@ -134,16 +138,16 @@ def _save_configs(configs: configparser.ConfigParser,
     with open(config_path, 'w') as f:
         configs.write(f)
 
-def download_chrome_driver():
+def download_chrome_driver(root_path):
     driverFileName = "chromedriver.exe"
     zipFileName = "chromedriver.zip"
 
-    if False == os.path.isfile(driverFileName):
-        urllib.request.urlretrieve("https://chromedriver.storage.googleapis.com/2.41/chromedriver_win32.zip", zipFileName)
-        chromeDriverZip = zipfile.ZipFile(zipFileName, 'r')
-        chromeDriverZip.extractall("./")
+    if False == os.path.isfile(root_path + driverFileName):
+        urllib.request.urlretrieve("https://chromedriver.storage.googleapis.com/2.41/chromedriver_win32.zip", root_path + zipFileName)
+        chromeDriverZip = zipfile.ZipFile(root_path + zipFileName, 'r')
+        chromeDriverZip.extractall(root_path)
         chromeDriverZip.close()
-        os.remove(zipFileName)
+        os.remove(root_path + zipFileName)
 
 if __name__ == '__main__':
     main()
