@@ -27,8 +27,6 @@ def main():
     config_path = os.path.join(pkg_root_path, 'config.ini')
     configs.read(config_path)
 
-    _download_chromedriver(pkg_root_path)
-
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='subroutine')
     parser.add_argument('--webdriver-path',
@@ -81,7 +79,7 @@ def main():
     args_obj = vars(parser.parse_args())
 
     # Global params
-    webdriver_path = args_obj['webdriver_path']
+    webdriver_path = os.path.join(pkg_root_path, args_obj['webdriver_path'])
     base_url = args_obj['base_url']
     time_between_queries = args_obj['time_between_queries']
     max_query_attempts = args_obj['max_query_attempts']
@@ -89,6 +87,12 @@ def main():
 
     if save_configs:
         _save_configs(configs, config_path, args_obj)
+
+    if not os.path.isfile(webdriver_path):
+        print('The webdriver could not be found at "{}"'
+              .format(webdriver_path))
+
+    _download_chromedriver(pkg_root_path)
 
     data_path = os.path.join(pkg_root_path, 'data')
     if not os.path.exists(data_path):
