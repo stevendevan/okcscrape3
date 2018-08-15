@@ -1,4 +1,4 @@
-#! python3
+#!  python3
 """
 @author: Steven Devan
 """
@@ -6,6 +6,8 @@
 import os
 import argparse
 import configparser
+import urllib
+import zipfile
 
 from okcscrape3.fetchusers import fetchusers
 from okcscrape3.findusers import findusers
@@ -18,7 +20,7 @@ from okcscrape3.print_config import print_config
 
 
 def main():
-
+        
     # Parse config.ini
     configs = configparser.ConfigParser()
     pkg_root_path = os.path.dirname(__file__)
@@ -73,10 +75,14 @@ def main():
     parser_print = subparsers.add_parser('print-config',
                                          help='Print contents of config file.')
 
+    parser_webdriver = subparsers.add_parser('download-webdriver',
+                                             help='TODO')
+
     # vars() because we need to be able to access the contents like obj[str]
     args_obj = vars(parser.parse_args())
 
     # Global params
+    #webdriver_path = os.path.join(pkg_root_path, args_obj['webdriver_path'])
     webdriver_path = args_obj['webdriver_path']
     base_url = args_obj['base_url']
     time_between_queries = args_obj['time_between_queries']
@@ -85,6 +91,16 @@ def main():
 
     if save_configs:
         _save_configs(configs, config_path, args_obj)
+
+    if not os.path.isfile(os.path.join(pkg_root_path, webdriver_path)):
+        print('The webdriver could not be found at "{}"'
+              .format(webdriver_path))
+
+    #_download_chromedriver(pkg_root_path)
+
+    data_path = os.path.join(pkg_root_path, 'data')
+    if not os.path.exists(data_path):
+        os.makedirs(data_path)
 
     # # Main subroutine branching logic # #
     if args_obj['subroutine'] == 'findusers':
@@ -100,8 +116,7 @@ def main():
                   usernames_outfile=usernames_outfile,
                   num_usernames=num_usernames,
                   time_between_queries=time_between_queries,
-                  max_query_attempts=max_query_attempts,
-                  )
+                  max_query_attempts=max_query_attempts,)
     elif args_obj['subroutine'] == 'fetchusers':
 
         cookies_file = args_obj['cookies_file']
@@ -116,6 +131,8 @@ def main():
 
     elif args_obj['subroutine'] == 'print-config':
         print_config(configs)
+    elif args_obj['subroutine'] == 'download-webdriver':
+        _download_chromedriver(pkg_root_path)
 
 
 def _save_configs(configs: configparser.ConfigParser,
@@ -131,6 +148,16 @@ def _save_configs(configs: configparser.ConfigParser,
     with open(config_path, 'w') as f:
         configs.write(f)
 
+def _download_chromedriver(root_path):
+    zip_file_name = "chromedriver.zip"
+
+    urllib.request.urlretrieve("https://chromedriver.storage.googleapis.com"
+                               "/2.41/chromedriver_win32.zip",
+                               root_path + '\\' + zip_file_name)    
+    chromeDriverZip = zipfile.ZipFile(root_path + '\\' + zip_file_name, 'r')
+    chromeDriverZip.extractall(root_path)
+    chromeDriverZip.close()
+    os.remove(root_path + '\\' + zip_file_name)
 
 if __name__ == '__main__':
     main()
