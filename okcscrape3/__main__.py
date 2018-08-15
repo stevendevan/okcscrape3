@@ -27,7 +27,7 @@ def main():
     config_path = os.path.join(pkg_root_path, 'config.ini')
     configs.read(config_path)
 
-    download_chrome_driver(pkg_root_path)
+    _download_chromedriver(pkg_root_path)
 
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='subroutine')
@@ -138,7 +138,7 @@ def _save_configs(configs: configparser.ConfigParser,
     with open(config_path, 'w') as f:
         configs.write(f)
 
-def download_chrome_driver(root_path):
+def _download_chromedriver(root_path):
     driverFileName = "chromedriver.exe"
     zipFileName = "chromedriver.zip"
 
