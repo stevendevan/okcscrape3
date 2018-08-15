@@ -90,8 +90,8 @@ def main():
     if save_configs:
         _save_configs(configs, config_path, args_obj)
 
-    data_path = pkg_root_path + "/data"
-    if False == os.path.exists(data_path):
+    data_path = os.path.join(pkg_root_path, 'data')
+    if not os.path.exists(data_path):
         os.makedirs(data_path)
 
     # # Main subroutine branching logic # #
