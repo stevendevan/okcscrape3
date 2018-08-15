@@ -75,11 +75,15 @@ def main():
     parser_print = subparsers.add_parser('print-config',
                                          help='Print contents of config file.')
 
+    parser_webdriver = subparsers.add_parser('download-webdriver',
+                                             help='TODO')
+
     # vars() because we need to be able to access the contents like obj[str]
     args_obj = vars(parser.parse_args())
 
     # Global params
-    webdriver_path = os.path.join(pkg_root_path, args_obj['webdriver_path'])
+    #webdriver_path = os.path.join(pkg_root_path, args_obj['webdriver_path'])
+    webdriver_path = args_obj['webdriver_path']
     base_url = args_obj['base_url']
     time_between_queries = args_obj['time_between_queries']
     max_query_attempts = args_obj['max_query_attempts']
@@ -88,11 +92,11 @@ def main():
     if save_configs:
         _save_configs(configs, config_path, args_obj)
 
-    if not os.path.isfile(webdriver_path):
+    if not os.path.isfile(os.path.join(pkg_root_path, webdriver_path)):
         print('The webdriver could not be found at "{}"'
               .format(webdriver_path))
 
-    _download_chromedriver(pkg_root_path)
+    #_download_chromedriver(pkg_root_path)
 
     data_path = os.path.join(pkg_root_path, 'data')
     if not os.path.exists(data_path):
@@ -127,6 +131,8 @@ def main():
 
     elif args_obj['subroutine'] == 'print-config':
         print_config(configs)
+    elif args_obj['subroutine'] == 'download-webdriver':
+        _download_chromedriver(webdriver_path)
 
 
 def _save_configs(configs: configparser.ConfigParser,
