@@ -132,7 +132,7 @@ def main():
     elif args_obj['subroutine'] == 'print-config':
         print_config(configs)
     elif args_obj['subroutine'] == 'download-webdriver':
-        _download_chromedriver(webdriver_path)
+        _download_chromedriver(pkg_root_path)
 
 
 def _save_configs(configs: configparser.ConfigParser,
@@ -152,12 +152,13 @@ def _download_chromedriver(root_path):
     driverFileName = "chromedriver.exe"
     zipFileName = "chromedriver.zip"
 
-    if False == os.path.isfile(root_path + driverFileName):
-        urllib.request.urlretrieve("https://chromedriver.storage.googleapis.com/2.41/chromedriver_win32.zip", root_path + zipFileName)
-        chromeDriverZip = zipfile.ZipFile(root_path + zipFileName, 'r')
-        chromeDriverZip.extractall(root_path)
-        chromeDriverZip.close()
-        os.remove(root_path + zipFileName)
+    urllib.request.urlretrieve("https://chromedriver.storage.googleapis.com"
+                               "/2.41/chromedriver_win32.zip",
+                               root_path + '\\' + zipFileName)    
+    chromeDriverZip = zipfile.ZipFile(root_path + '\\' + zipFileName, 'r')
+    chromeDriverZip.extractall(root_path)
+    chromeDriverZip.close()
+    os.remove(root_path + '\\' + zipFileName)
 
 if __name__ == '__main__':
     main()
