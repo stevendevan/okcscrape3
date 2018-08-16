@@ -6,13 +6,24 @@ import zipfile
 
 #
 
-def download_webdriver(root_path: str) -> None:
-    zip_file_name = "chromedriver.zip"
+def download_webdriver(webdriver_path: str) -> None:
+    zip_file = _exe_to_zip(webdriver_path)
+    zip_path = _exe_to_folder(webdriver_path)
 
     urllib.request.urlretrieve("https://chromedriver.storage.googleapis.com"
                                "/2.41/chromedriver_win32.zip",
-                               root_path + '\\' + zip_file_name)    
-    chromeDriverZip = zipfile.ZipFile(root_path + '\\' + zip_file_name, 'r')
-    chromeDriverZip.extractall(root_path)
+                               zip_file)    
+    chromeDriverZip = zipfile.ZipFile(zip_file, 'r')
+    chromeDriverZip.extractall(zip_path)
     chromeDriverZip.close()
-    os.remove(root_path + '\\' + zip_file_name)
+    os.remove(zip_file)
+
+
+def _exe_to_zip(exe_path: str) -> str:
+    zip_path = regex.sub(r'(?<=chromedriver\.)exe', 'zip', exe_path)
+    return zip_path
+
+
+def _exe_to_folder(exe_path: str) -> str:
+    zip_folder = regex.sub(r'(?<=\\)\w+\.\w+$', '', exe_path)
+    return zip_folder
