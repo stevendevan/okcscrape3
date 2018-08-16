@@ -130,6 +130,8 @@ def main():
         print_config(configs)
     elif args_obj['subroutine'] == 'download-webdriver':
         download_webdriver(webdriver_path)
+    else:
+        parser.print_help()
 
 
 def _save_configs(configs: configparser.ConfigParser,
