@@ -84,7 +84,7 @@ def main():
 
     # Global params
     #webdriver_path = os.path.join(pkg_root_path, args_obj['webdriver_path'])
-    webdriver_path = args_obj['webdriver_path']
+    webdriver_path = os.path.join(pkg_root_path, args_obj['webdriver_path'])
     base_url = args_obj['base_url']
     time_between_queries = args_obj['time_between_queries']
     max_query_attempts = args_obj['max_query_attempts']
@@ -105,11 +105,10 @@ def main():
     if args_obj['subroutine'] == 'findusers':
 
         match_url_suffix = args_obj['match_url_suffix']
-        usernames_outfile = args_obj['usernames_outfile']
+        usernames_outfile = os.path.join(pkg_root_path, args_obj['usernames_outfile'])
         num_usernames = args_obj['num_usernames']
 
-        findusers(pkg_root_path=pkg_root_path,
-                  webdriver_path=webdriver_path,
+        findusers(webdriver_path=webdriver_path,
                   base_url=base_url,
                   match_url_suffix=match_url_suffix,
                   usernames_outfile=usernames_outfile,
@@ -119,19 +118,18 @@ def main():
     elif args_obj['subroutine'] == 'fetchusers':
 
         cookies_file = args_obj['cookies_file']
-        usernames_file = args_obj['usernames_file']
-        profiles_outfile = args_obj['profiles_outfile']
+        usernames_file = os.path.join(pkg_root_path, args_obj['usernames_file'])
+        profiles_outfile = os.path.join(pkg_root_path, args_obj['profiles_outfile'])
         num_profiles = args_obj['num_profiles']
 
-        fetchusers(pkg_root_path=pkg_root_path,
-                   webdriver_path=webdriver_path,
+        fetchusers(webdriver_path=webdriver_path,
                    usernames_file=usernames_file,
                    profiles_outfile=profiles_outfile)
 
     elif args_obj['subroutine'] == 'print-config':
         print_config(configs)
     elif args_obj['subroutine'] == 'download-webdriver':
-        download_webdriver(pkg_root_path)
+        download_webdriver(webdriver_path)
 
 
 def _save_configs(configs: configparser.ConfigParser,
