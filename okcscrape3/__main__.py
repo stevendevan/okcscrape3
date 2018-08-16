@@ -21,7 +21,7 @@ from okcscrape3.download_webdriver import download_webdriver
 
 
 def main():
-        
+
     # Parse config.ini
     configs = configparser.ConfigParser()
     pkg_root_path = os.path.dirname(__file__)
@@ -32,58 +32,88 @@ def main():
     subparsers = parser.add_subparsers(dest='subroutine')
     parser.add_argument('--webdriver-path',
                         default=configs['global']['webdriver_path'],
-                        help='Specify the path of the webdriver.')
+                        help='Specify the path of the webdriver. Can be '
+                             'relative to the package root path or absolute.')
     parser.add_argument('--base-url',
-                        default=configs['global']['base_url'], help='TODO')
-    parser.add_argument('--time-between-queries', type=int,
+                        default=configs['global']['base_url'],
+                        help='The base url for the OKCupid website.')
+    parser.add_argument('--time-between-queries',
+                        type=int,
                         default=configs['global']['time_between_queries'],
-                        help='TODO')
-    parser.add_argument('--max-query-attempts', type=int,
+                        help='Time in seconds to sleep between each webpage '
+                             'request. This is to avoid '
+                             'throttling/blacklisting by OKC servers.')
+    parser.add_argument('--max-query-attempts',
+                        type=int,
                         default=configs['global']['max_query_attempts'],
-                        help='TODO')
-    parser.add_argument('--no-save-configs', action='store_false',
-                        default=True, dest='save_configs', help='TODO')
+                        help='The number of attempts to make when requesting '
+                             'a webpage, in case the first request is not '
+                             'successful.')
+    parser.add_argument('--no-save-configs',
+                        action='store_false',
+                        default=True,
+                        dest='save_configs',
+                        help='If used, any other cl-args provided are not '
+                             'saved to the config.ini file. This arg does '
+                             'not require a value.')
 
-    parser_find = subparsers.add_parser('findusers', help='Run find.')
+    parser_find = subparsers.add_parser('findusers',
+                                        help='Find random OKCupid usernames '
+                                             'and log them in a csv.')
     parser_find.add_argument('--match-url-suffix',
                              default=configs['findusers']['match_url_suffix'],
-                             help='TODO')
+                             help='i.e. base_url + match_url_suffix = "OKC '
+                                  'browse users page", from which the '
+                                  'usernames are collected.')
     parser_find.add_argument('--outfile',
                              default=configs['findusers']['usernames_outfile'],
                              dest='usernames_outfile',
-                             help='Name of outfile.')
+                             help='Name or absolute path of the csv in which '
+                                  'to store the collected usernames.')
     parser_find.add_argument('--num-usernames',
                              type=int,
                              default=configs['findusers']['num_usernames'],
-                             help='TODO')
+                             help='Integer specifying the number of random '
+                                  'usernames to collect.')
 
-    parser_fetch = subparsers.add_parser('fetchusers', help='Run fetch.')
+    parser_fetch = subparsers.add_parser('fetchusers',
+                                         help='Given a list of usernames, '
+                                              'navigate to each user\'s '
+                                              'profile and log the contents '
+                                              'in a csv.')
     parser_fetch.add_argument('--cookies-file',
                               default=configs['fetchusers']['cookies_file'],
-                              help='File containing cookies.')
+                              help='Name or absolute path to the .json file '
+                                   'containing the OKC cookies (credentials) '
+                                   'necessary to view user profiles.')
     parser_fetch.add_argument('--usernames-file',
                               default=configs['fetchusers']['usernames_file'],
-                              help=('File of usernames of profiles to be '
-                                    'fetched.'))
+                              help=('Name or absolute path of a usernames csv '
+                                    'from which to get a list of usernames '
+                                    'of which to fetch the profiles.'))
     parser_fetch.add_argument('--outfile',
                               default=configs['fetchusers']['profiles_outfile'],
                               dest='profiles_outfile',
-                              help='TODO')
+                              help='Name or absolute path of the csv in which '
+                                   'to store user profile information.')
     parser_fetch.add_argument('--num-profiles',
                               default=configs['fetchusers']['num_profiles'],
-                              help='TODO')
+                              help='Integer specifying the number of profiles '
+                                   'to fetch.')
 
     parser_print = subparsers.add_parser('print-config',
                                          help='Print contents of config file.')
 
     parser_webdriver = subparsers.add_parser('download-webdriver',
-                                             help='TODO')
+                                             help='Download the '
+                                                  '"chromedriver.exe" headless'
+                                                  ' web browser that selenium '
+                                                  'will use to navigate OKC.')
 
     # vars() because we need to be able to access the contents like obj[str]
     args_obj = vars(parser.parse_args())
 
     # Global params
-    #webdriver_path = os.path.join(pkg_root_path, args_obj['webdriver_path'])
     webdriver_path = os.path.join(pkg_root_path, args_obj['webdriver_path'])
     base_url = args_obj['base_url']
     time_between_queries = args_obj['time_between_queries']
@@ -105,7 +135,8 @@ def main():
     if args_obj['subroutine'] == 'findusers':
 
         match_url_suffix = args_obj['match_url_suffix']
-        usernames_outfile = os.path.join(pkg_root_path, args_obj['usernames_outfile'])
+        usernames_outfile = os.path.join(
+            pkg_root_path, args_obj['usernames_outfile'])
         num_usernames = args_obj['num_usernames']
 
         findusers(webdriver_path=webdriver_path,
@@ -118,8 +149,10 @@ def main():
     elif args_obj['subroutine'] == 'fetchusers':
 
         cookies_file = args_obj['cookies_file']
-        usernames_file = os.path.join(pkg_root_path, args_obj['usernames_file'])
-        profiles_outfile = os.path.join(pkg_root_path, args_obj['profiles_outfile'])
+        usernames_file = os.path.join(pkg_root_path,
+                                      args_obj['usernames_file'])
+        profiles_outfile = os.path.join(pkg_root_path,
+                                        args_obj['profiles_outfile'])
         num_profiles = args_obj['num_profiles']
 
         fetchusers(webdriver_path=webdriver_path,
