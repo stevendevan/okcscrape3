@@ -12,6 +12,7 @@ import zipfile
 from okcscrape3.fetchusers import fetchusers
 from okcscrape3.findusers import findusers
 from okcscrape3.print_config import print_config
+from okcscrape3.download_webdriver import download_webdriver
 
 """Improvement ideas:
 1.  Separate each primary function into its own file, along with a
@@ -96,8 +97,6 @@ def main():
         print('The webdriver could not be found at "{}"'
               .format(webdriver_path))
 
-    #_download_chromedriver(pkg_root_path)
-
     data_path = os.path.join(pkg_root_path, 'data')
     if not os.path.exists(data_path):
         os.makedirs(data_path)
@@ -132,7 +131,7 @@ def main():
     elif args_obj['subroutine'] == 'print-config':
         print_config(configs)
     elif args_obj['subroutine'] == 'download-webdriver':
-        _download_chromedriver(pkg_root_path)
+        download_webdriver(pkg_root_path)
 
 
 def _save_configs(configs: configparser.ConfigParser,
