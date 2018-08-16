@@ -147,16 +147,6 @@ def _save_configs(configs: configparser.ConfigParser,
     with open(config_path, 'w') as f:
         configs.write(f)
 
-def _download_chromedriver(root_path):
-    zip_file_name = "chromedriver.zip"
-
-    urllib.request.urlretrieve("https://chromedriver.storage.googleapis.com"
-                               "/2.41/chromedriver_win32.zip",
-                               root_path + '\\' + zip_file_name)    
-    chromeDriverZip = zipfile.ZipFile(root_path + '\\' + zip_file_name, 'r')
-    chromeDriverZip.extractall(root_path)
-    chromeDriverZip.close()
-    os.remove(root_path + '\\' + zip_file_name)
 
 if __name__ == '__main__':
     main()
