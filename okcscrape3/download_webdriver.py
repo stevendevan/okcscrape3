@@ -13,9 +13,9 @@ def download_webdriver(webdriver_path: str) -> None:
     urllib.request.urlretrieve("https://chromedriver.storage.googleapis.com"
                                "/2.41/chromedriver_win32.zip",
                                zip_file)    
-    chromeDriverZip = zipfile.ZipFile(zip_file, 'r')
-    chromeDriverZip.extractall(zip_path)
-    chromeDriverZip.close()
+    chromedriver_zip = zipfile.ZipFile(zip_file, 'r')
+    chromedriver_zip.extractall(zip_path)
+    chromedriver_zip.close()
     os.remove(zip_file)
 
 
