@@ -14,8 +14,9 @@ from okcscrape3.findusers import findusers
 from okcscrape3.print_config import print_config
 from okcscrape3.download_webdriver import download_webdriver
 
-"""Improvement ideas:
-1.  ###
+"""Improvement ideas (missing #s already completed):
+2.  Automate arg parser generation/setup by pulling subparser and arg info
+    from a .json or something similar.
 """
 
 
