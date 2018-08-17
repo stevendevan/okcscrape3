@@ -15,6 +15,8 @@ from okcscrape3.download_webdriver import download_webdriver
 """Improvement ideas (missing #s already completed):
 2.  Automate arg parser generation/setup by pulling subparser and arg info
     from a .json or something similar.
+3.  Externalize webdriver initialization, probably to util.py, similar to
+    util.get_webpage currently.
 """
 
 
