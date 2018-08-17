@@ -6,8 +6,6 @@
 import os
 import argparse
 import configparser
-import urllib
-import zipfile
 
 from okcscrape3.fetchusers import fetchusers
 from okcscrape3.findusers import findusers
