@@ -15,8 +15,7 @@ from okcscrape3.print_config import print_config
 from okcscrape3.download_webdriver import download_webdriver
 
 """Improvement ideas:
-1.  Separate each primary function into its own file, along with a
-    'global functions' file or something similar.
+1.  ###
 """
 
 
@@ -24,6 +23,7 @@ def main():
 
     # Parse config.ini
     configs = configparser.ConfigParser()
+
     pkg_root_path = os.path.dirname(__file__)
     config_path = os.path.join(pkg_root_path, 'config.ini')
     configs.read(config_path)
