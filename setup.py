@@ -10,4 +10,5 @@ setup(
                       'regex'],
     entry_points={'console_scripts': ['okcscrape3 = okcscrape3.__main__:main']
                   },
+    package_data={'': ['config.ini']}
 )
