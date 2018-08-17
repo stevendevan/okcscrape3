@@ -6,6 +6,11 @@ from selenium import webdriver
 #
 
 
+def initialize_webdriver(webdriver_path: str,
+                         cookies_file: str) -> webdriver.Chrome:
+    pass
+
+
 def get_webpage(browser: selenium.webdriver.Chrome,
                 url: str,
                 max_query_attempts: int) -> str:
