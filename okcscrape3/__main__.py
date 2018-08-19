@@ -124,10 +124,6 @@ def main():
     if save_configs:
         _save_configs(configs, config_path, args_obj)
 
-    if not os.path.isfile(os.path.join(pkg_root_path, webdriver_path)):
-        print('The webdriver could not be found at "{}"'
-              .format(webdriver_path))
-
     data_path = os.path.join(pkg_root_path, 'data')
     if not os.path.exists(data_path):
         os.makedirs(data_path)
