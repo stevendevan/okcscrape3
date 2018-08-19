@@ -8,6 +8,7 @@ from okcscrape3 import util
 
 
 def fetchusers(webdriver_path: str,
+               cookies_file: str,
                usernames_file: str,
                profiles_outfile: str):
     print('Run fetchusers.')
