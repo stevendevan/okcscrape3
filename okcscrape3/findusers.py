@@ -50,7 +50,7 @@ def findusers(usernames_outfile: str,
 
         usernames_list = []
 
-    browser = webdriver.Chrome(executable_path=webdriver_path)  # [1]
+    browser = util.initialize_webdriver(webdriver_path)
     url = base_url + match_url_suffix
 
     num_found_users = 0
