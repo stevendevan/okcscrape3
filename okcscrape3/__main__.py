@@ -136,8 +136,8 @@ def main():
     if args_obj['subroutine'] == 'findusers':
 
         match_url_suffix = args_obj['match_url_suffix']
-        usernames_outfile = os.path.join(
-            pkg_root_path, args_obj['usernames_outfile'])
+        usernames_outfile = os.path.join(pkg_root_path,
+                                         args_obj['usernames_outfile'])
         num_usernames = args_obj['num_usernames']
 
         findusers(webdriver_path=webdriver_path,
@@ -149,7 +149,8 @@ def main():
                   max_query_attempts=max_query_attempts,)
     elif args_obj['subroutine'] == 'fetchusers':
 
-        cookies_file = args_obj['cookies_file']
+        cookies_file = os.path.join(pkg_root_path,
+                                    args_obj['cookies_file'])
         usernames_file = os.path.join(pkg_root_path,
                                       args_obj['usernames_file'])
         profiles_outfile = os.path.join(pkg_root_path,
@@ -157,6 +158,7 @@ def main():
         num_profiles = args_obj['num_profiles']
 
         fetchusers(webdriver_path=webdriver_path,
+                   cookies_file=cookies_file,
                    usernames_file=usernames_file,
                    profiles_outfile=profiles_outfile)
 
