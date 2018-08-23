@@ -98,6 +98,7 @@ def main():
                               help='Name or absolute path of the csv in which '
                                    'to store user profile information.')
     parser_fetch.add_argument('--num-profiles',
+                              type=int,
                               default=configs['fetchusers']['num_profiles'],
                               help='Integer specifying the number of profiles '
                                    'to fetch.')
@@ -154,9 +155,11 @@ def main():
         num_profiles = args_obj['num_profiles']
 
         fetchusers(webdriver_path=webdriver_path,
+                   base_url=base_url,
                    cookies_file=cookies_file,
                    usernames_file=usernames_file,
-                   profiles_outfile=profiles_outfile)
+                   profiles_outfile=profiles_outfile,
+                   num_profiles=num_profiles)
 
     elif args_obj['subroutine'] == 'print-config':
         print_config(configs)
