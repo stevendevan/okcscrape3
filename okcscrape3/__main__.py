@@ -139,11 +139,13 @@ def main():
 
         findusers(webdriver_path=webdriver_path,
                   base_url=base_url,
+                  time_between_queries=time_between_queries,
+                  max_query_attempts=max_query_attempts,
+
                   match_url_suffix=match_url_suffix,
                   usernames_outfile=usernames_outfile,
-                  num_usernames=num_usernames,
-                  time_between_queries=time_between_queries,
-                  max_query_attempts=max_query_attempts,)
+                  num_usernames=num_usernames,)
+
     elif args_obj['subroutine'] == 'fetchusers':
 
         cookies_file = os.path.join(pkg_root_path,
@@ -153,13 +155,20 @@ def main():
         profiles_outfile = os.path.join(pkg_root_path,
                                         args_obj['profiles_outfile'])
         num_profiles = args_obj['num_profiles']
+        profile_html_targets_file = os.path.join(pkg_root_path,
+                                                 configs['profile_html_targets_file'])
 
         fetchusers(webdriver_path=webdriver_path,
                    base_url=base_url,
+                   time_between_queries=time_between_queries,
+                   max_query_attempts=max_query_attempts,
+
                    cookies_file=cookies_file,
                    usernames_file=usernames_file,
                    profiles_outfile=profiles_outfile,
-                   num_profiles=num_profiles)
+                   num_profiles=num_profiles,
+
+                   profile_html_targets_file=profile_html_targets_file,)
 
     elif args_obj['subroutine'] == 'print-config':
         print_config(configs)

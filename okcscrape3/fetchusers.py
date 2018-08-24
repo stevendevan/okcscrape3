@@ -11,10 +11,13 @@ from okcscrape3 import util
 
 def fetchusers(webdriver_path: str,
                base_url: str,
+               time_between_queries: int,
+               max_query_attempts: int,
                cookies_file: str,
                usernames_file: str,
                profiles_outfile: str,
-               num_profiles: int):
+               num_profiles: int,
+               profile_html_targets_file: str):
     print('Run fetchusers.')
     """Fetchusers procedure:
     1.  Read in usernames from usernames csv, get a list of ones that
@@ -27,10 +30,10 @@ def fetchusers(webdriver_path: str,
     5.  Add cookies and whatever else to webdriver (verbosity levels, etc)
     6.  Loop through username list, earliest first
             a.  sleep
-            a.  build url
-            a.  get webpage
-            a.  send html to parser functions
-            a.  append results to the specified csv
+            b.  build url
+            c.  get webpage
+            d.  send html to parser functions
+            e.  append results to the specified csv
     7.  ??
     """
 
@@ -51,14 +54,26 @@ def fetchusers(webdriver_path: str,
         html_targets = json.load(f)
 
     for username in usernames_to_fetch[:num_profiles]:
-        # Probably need try block, but what are the exceptions to catch?
+
+        # Probably need a try block, but what are the exceptions to catch?
         profile_dict = {}
         browser.get(base_url + 'profile/' + username)
         html = browser.page_source
         soup = BeautifulSoup(html, 'html.parser')
 
         for target in html_targets:
-            name = target['name']
-            attrs = target['attrs']
-            target_soup = soup.find(name=name, attrs=attrs)
+
+            # Navigate to subsection in html that has the target we want
+            target_soup = soup  # Reset the soup tree navigation
+            for html_layer in target['layers']:
+                name = html_layer['name']
+                attrs = html_layer['attrs']
+                target_soup = target_soup.find(name=name, attrs=attrs)
+
+            # Actually grab the target
+            target_details = target['target_details']
+            name = target_details['name']
+            attrs = target_details['attrs']
+            target_soup = target_soup.find(name=name, attrs=attrs)
+
             profile_dict[target['label']] = target_soup.text.lower()
