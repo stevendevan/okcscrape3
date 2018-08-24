@@ -2,6 +2,7 @@ import csv
 import sys
 import os
 import json
+import time
 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -55,12 +56,16 @@ def fetchusers(webdriver_path: str,
 
     for username in usernames_to_fetch[:num_profiles]:
 
+        # Sleep to avoid throttling/blacklisting by okcupid
+        time.sleep(time_between_queries)
+
         # Probably need a try block, but what are the exceptions to catch?
-        profile_dict = {}
-        browser.get(base_url + 'profile/' + username)
+        profile_url = base_url + 'profile/' + username
+        util.get_webpage(browser, profile_url, max_query_attempts)
+
         html = browser.page_source
         soup = BeautifulSoup(html, 'html.parser')
-
+        profile_dict = {}
         for target in html_targets:
 
             # Navigate to subsection in html that has the target we want
