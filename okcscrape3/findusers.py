@@ -31,10 +31,6 @@ def findusers(usernames_outfile: str,
         hard-coded.
     """
     print('Running findusers:')
-
-    #usernames_outfile = os.path.join(pkg_root_path, usernames_outfile)
-    #webdriver_path = os.path.join(pkg_root_path, webdriver_path)
-
     try:
         # Using pandas because it's simple. May be slower than csv module.
         usernames_df = pd.read_csv(usernames_outfile, dtype={'username': str})
