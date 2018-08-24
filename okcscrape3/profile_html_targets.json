@@ -1,0 +1,83 @@
+[
+  {
+    "label": "name",
+    "layers": [],
+    "target_details": {
+      "name": "div",
+      "attrs": {
+        "class": "userinfo2015-basics-username"
+      }
+    }
+  },
+  {
+    "label": "age",
+    "layers": [],
+    "target_details": {
+      "name": "span",
+      "attrs": {
+        "class": "userinfo2015-basics-asl-age"
+      }
+    }
+  },
+  {
+    "label": "location",
+    "layers": [],
+    "target_details": {
+      "name": "span",
+      "attrs": {
+        "class": "userinfo2015-basics-asl-location"
+      }
+    }
+  },
+  {
+    "label": "basics",
+    "layers": [
+      {
+        "name": "div",
+        "attrs": {
+          "class": "matchprofile-details-section matchprofile-details-section--basics"
+        }
+      }
+    ],
+    "target_details": {
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-text"
+      }
+    }
+  },
+  {
+    "label": "background",
+    "layers": [
+      {
+        "name": "div",
+        "attrs": {
+          "class": "matchprofile-details-section matchprofile-details-section--background"
+        }
+      }
+    ],
+    "target_details": {
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-text"
+      }
+    }
+  },
+  {
+    "label": "what_i_want",
+    "layers": [
+      {
+        "name": "div",
+        "attrs": {
+          "class": "matchprofile-details-section matchprofile-details-section--wiw"
+        }
+      }
+    ],
+    "target_details": {
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-text"
+      }
+    }
+  }
+]

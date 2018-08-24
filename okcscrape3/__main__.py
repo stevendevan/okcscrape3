@@ -156,7 +156,8 @@ def main():
                                         args_obj['profiles_outfile'])
         num_profiles = args_obj['num_profiles']
         profile_html_targets_file = os.path.join(pkg_root_path,
-                                                 configs['profile_html_targets_file'])
+                                                 configs['fetchusers']
+                                                 ['profile_html_targets_file'])
 
         fetchusers(webdriver_path=webdriver_path,
                    base_url=base_url,

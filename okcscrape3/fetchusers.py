@@ -51,7 +51,7 @@ def fetchusers(webdriver_path: str,
     browser = util.initialize_webdriver(webdriver_path=webdriver_path,
                                         cookies_file=cookies_file)
 
-    with open('profile_html_targets.json', 'r') as f:
+    with open(profile_html_targets_file, 'r') as f:
         html_targets = json.load(f)
 
     for username in usernames_to_fetch[:num_profiles]:
