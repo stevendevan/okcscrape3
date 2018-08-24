@@ -59,7 +59,6 @@ def fetchusers(webdriver_path: str,
         # Sleep to avoid throttling/blacklisting by okcupid
         time.sleep(time_between_queries)
 
-        # Probably need a try block, but what are the exceptions to catch?
         profile_url = base_url + 'profile/' + username
         util.get_webpage(browser, profile_url, max_query_attempts)
 
