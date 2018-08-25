@@ -83,9 +83,6 @@ def findusers(usernames_outfile: str,
               .format(num_found_users, num_usernames))
 
 
-# Internal functions below?
-
-
 def extract_usernames_from_html(html: str) -> list:
     """Pull a list of usernames from html.
     Notes:
