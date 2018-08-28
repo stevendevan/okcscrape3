@@ -20,4 +20,6 @@ Here's an example of what that looks like:
 
 ![](https://i.imgur.com/8gOigL8.gif)
 
-If the 'Scripts' folder of the Python 3 installation on which you just installed okcscrape3 is on your %PATH%, you can simply 
+If the 'Scripts' folder of the Python 3 installation on which you just installed okcscrape3 is on your %PATH%, you can simply install the package and call the app by typing 'okcscrape3' in the command prompt.
+
+I haven't comprehensively tested the installation process, so let me know if you run into issues.
