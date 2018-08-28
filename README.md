@@ -5,7 +5,9 @@ Scrape and log usernames and profile text content from the popular dating websit
 ### How to use it
 okcscrape3 is a command line app, so install it, run it on the command line, and check out the help text like so:
 
-![](https://i.imgur.com/MdRKSv7.gif)
+<p align="center">
+  <img src="https://i.imgur.com/MdRKSv7.gif">
+</p>
 
 ### How to install it
 Clone the repo or download + extract it, spin up a terminal/shell (I've only tested this on Windows), navigate to the top level 'okcscrape3' folder and use pip to install with the following command:
@@ -18,7 +20,9 @@ Or just however you access pip, which would essentially be:
 ```
 Here's an example of what that looks like:
 
-![](https://i.imgur.com/8gOigL8.gif)
+<p align="center">
+  <img src="https://i.imgur.com/8gOigL8.gif">
+</p>
 
 If the 'Scripts' folder of the Python 3 installation on which you just installed okcscrape3 is on your %PATH%, you can simply install the package and call the app by typing 'okcscrape3' in the command prompt.
 
