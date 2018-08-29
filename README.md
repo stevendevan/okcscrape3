@@ -16,6 +16,8 @@ okcscrape3 is a command line app, so install it, run it on the command line, and
   <img src="https://i.imgur.com/MdRKSv7.gif">
 </p>
 
+To actually view and scrape OKC profiles, you will need to provide a ```cookies.json``` file, which is basically OKC user dredentials needed to look at profiles.
+
 ### Detailed command overview
 >```okcscrape3 <args>```
 
@@ -27,11 +29,17 @@ Calling okcscrape3 using only arguments and no subroutine will allow you to set 
   
 The ```findusers``` subroutine will launch a Selenium Chromedriver instance and navigate to the OKC "browse profiles" page to scrape usernames. The usernames, along with the date they were gathered and a boolean flag indicating whether the profile associated with that username has been fetched yet, will be stored in a .csv in the ```data``` folder of the package installation directory. A cookies file is not required to use this subroutine.
 
->```okcscrape3 <args> fetchusers>```
+>```okcscrape3 <args> fetchusers <args>```
   
 The ```fetchusers``` subroutine will launch a Selenium Chromedriver instance, navigate to profiles using the usernames gathered by ```findusers```, and grab the profile contents. You must provide the package with a ```cookies.json```, because in order to access other user's profiles, the Chromedriver instance must be "logged in". The profile data is stored in a #TODO.
 
+>```okcscrape3 <args> print-config```
+  
+Print the contents of the ```config.ini``` file.
 
+>```okcscrape3 <args> download-webdriver```
+  
+Download the ```chromedriver.exe``` from ```https://chromedriver.storage.googleapis.com/2.41/chromedriver_win32.zip``` for Selenium to use.
 
 ## How to install it
 Clone the repo or download + extract it, spin up a terminal/shell (I've only tested this on Windows), navigate to the top level 'okcscrape3' folder and use pip to install with the following command:
