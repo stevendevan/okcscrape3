@@ -2,6 +2,13 @@
 (**okc**upid **scrape**r in Python **3**)
 ### What it does
 Scrape and log usernames and profile text content from the popular dating website OKCupid.
+
+Here's what it captures:
+
+<p align="center">
+  <img src="https://i.imgur.com/Nq3xt7K.png">
+</p>
+
 ### How to use it
 okcscrape3 is a command line app, so install it, run it on the command line, and check out the help text like so:
 
