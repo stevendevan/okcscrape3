@@ -16,7 +16,42 @@ okcscrape3 is a command line app, so install it, run it on the command line, and
   <img src="https://i.imgur.com/MdRKSv7.gif">
 </p>
 
-To actually view and scrape OKC profiles, you will need to provide a ```cookies.json``` file, which is basically OKC user dredentials needed to look at profiles.
+To actually view and scrape OKC profiles, you will need to provide a ```cookies.json``` file, which is basically OKC user dredentials needed to look at profiles. If you have logged into OKC on Chrome before, you can find all the cookie values in the advanced settings. Here's what the file should contain:
+
+```
+[
+  {
+    "domain": ".okcupid.com",
+    "name": "authlink",
+    "value": "<value>"
+  },
+  {
+    "domain": ".okcupid.com",
+    "name": "nano",
+    "value": "<value>"
+  },
+  {
+    "domain": ".okcupid.com",
+    "name": "override_session",
+    "value": "<value>"
+  },
+  {
+    "domain": ".okcupid.com",
+    "name": "secure_check",
+    "value": "<value>"
+  },
+  {
+    "domain": ".okcupid.com",
+    "name": "secure_login",
+    "value": "<value>"
+  },
+  {
+    "domain": ".okcupid.com",
+    "name": "session",
+    "value": "<value>"
+  }
+]
+```
 
 ### Detailed command overview
 >```okcscrape3 <args>```
