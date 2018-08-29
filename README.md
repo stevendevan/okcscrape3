@@ -25,7 +25,13 @@ Calling okcscrape3 using only arguments and no subroutine will allow you to set 
 
 >```okcscrape3 <args> findusers <args>```
   
-This is the ```findusers``` subroutine. Calling this will launch a Selenium Chromedriver instance and navigate to the OKC "browse profiles" page to scrape usernames. The usernames, along with the date they were gathered and a boolean flag indicating whether the profile associated with that username has been fetched yet, will be stored in a .csv in the ```data``` folder of the package installation directory. A cookies file is not required to use this subroutine.
+The ```findusers``` subroutine will launch a Selenium Chromedriver instance and navigate to the OKC "browse profiles" page to scrape usernames. The usernames, along with the date they were gathered and a boolean flag indicating whether the profile associated with that username has been fetched yet, will be stored in a .csv in the ```data``` folder of the package installation directory. A cookies file is not required to use this subroutine.
+
+>```okcscrape3 <args> fetchusers>```
+  
+The ```fetchusers``` subroutine will launch a Selenium Chromedriver instance, navigate to profiles using the usernames gathered by ```findusers```, and grab the profile contents. You must provide the package with a ```cookies.json```, because in order to access other user's profiles, the Chromedriver instance must be "logged in". The profile data is stored in a #TODO.
+
+
 
 ## How to install it
 Clone the repo or download + extract it, spin up a terminal/shell (I've only tested this on Windows), navigate to the top level 'okcscrape3' folder and use pip to install with the following command:
