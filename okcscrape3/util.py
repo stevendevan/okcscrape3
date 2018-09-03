@@ -2,6 +2,7 @@ import json
 
 import selenium
 from selenium import webdriver
+from bs4 import BeautifulSoup
 
 #
 
@@ -62,3 +63,106 @@ def get_webpage(browser: selenium.webdriver.Chrome,
             break
 
     return browser.page_source
+
+
+def extract_data_from_html(html, json_file):
+    
+    with open('D:\_proj\okcscrape3\sandbox\profile_html_targets.json', 'r') as f:
+        instructions = json.load(f)
+
+    soup = BeautifulSoup(html, 'html.parser')
+
+    #data = {}
+    for instruction_set in instructions:
+
+        steps = create_linked_list(instruction_set)
+
+        data = execute_step(soup, steps)
+
+    """
+    soup_base = stuff
+    for instruction_set in instructions_all
+        soup_temp = soup_base
+        for step in instructions_set
+            for soup_temp_item in soup_temp
+                if 'find'
+                if 'find_all'
+                    soup_temp = soup_temp.find_all(stuff)
+    """
+    pass
+
+
+def execute_step(soup, step, data=None):
+    # Found out the hard way that using a mutable default arg value is bad.
+    if data is None:
+        data = {}
+
+    step_info = step.get_val()
+    action = step_info['action']
+    label = step_info['label']
+    rtype = step_info['rtype']
+    name = step_info['name']
+    attrs = step_info['attrs']
+
+    if label is not None:
+        data[label] = None
+
+    if action == 'find':
+        soup = soup.find(name=name, attrs=attrs)
+        if rtype == 'text':
+            data[label] = soup.get_text(strip=True)
+
+        if step.has_next():            
+            return execute_step(soup, step.get_next(), data)
+        else:            
+            return data
+
+    elif action == 'find_all':
+        
+        soup_list = soup.find_all(name=name, attrs=attrs)
+        data_new = []
+        for soup in soup_list:
+            if rtype == 'text':
+                data_new.append(soup.text)
+            elif step.has_next():
+                data_new.append(execute_step(soup, step.get_next()))
+            else:
+                raise SystemExit('find_all else condition hit')
+
+
+def create_linked_list(normal_list):
+    head_old = Node(normal_list[-1])
+    for element in normal_list[-2::-1]:
+        head_new = Node(element)
+        head_new.set_next(head_old)
+        head_old = head_new
+
+    return head_old
+
+
+#class LinkedList(object):
+#    def __init__(self, head=None):
+#        self.head = head
+#
+#    def insert(self, data):
+#        new_node = Node(data)
+#        new_node.set_next(self.head)
+#        self.head = new_node
+
+
+class Node(object):
+    def __init__(self, node_info):
+        self.val = node_info
+        self.next = None
+
+    def get_val(self):
+        return self.val
+
+    def get_next(self):
+        return self.next
+
+    def set_next(self, new_next):
+        self.next = new_next
+
+    def has_next(self):
+        return self.next is not None
