@@ -78,6 +78,8 @@ def extract_data_from_html(html, json_file):
         steps = create_linked_list(instruction_set)
 
         data = execute_step(soup, steps)
+        import ipdb; ipdb.set_trace()  # breakpoint a11bf64a //
+        junk = 1
 
     """
     soup_base = stuff
@@ -96,6 +98,8 @@ def execute_step(soup, step, data=None):
     # Found out the hard way that using a mutable default arg value is bad.
     if data is None:
         data = {}
+    else:
+        target = data
 
     step_info = step.get_val()
     action = step_info['action']
@@ -108,24 +112,29 @@ def execute_step(soup, step, data=None):
         data[label] = None
 
     if action == 'find':
-        soup = soup.find(name=name, attrs=attrs)
+        soup_new = soup.find(name=name, attrs=attrs)
         if rtype == 'text':
-            data[label] = soup.get_text(strip=True)
+            target = soup_new.get_text(strip=True)
+
+        if label is not None:
+            data[label] = target
+        else:
+            data = target
 
         if step.has_next():            
-            return execute_step(soup, step.get_next(), data)
+            return execute_step(soup_new, step.get_next(), data)
         else:            
             return data
 
     elif action == 'find_all':
-        
+
         soup_list = soup.find_all(name=name, attrs=attrs)
         data_new = []
-        for soup in soup_list:
+        for soup_item in soup_list:
             if rtype == 'text':
-                data_new.append(soup.text)
+                data_new.append(soup_item.text)
             elif step.has_next():
-                data_new.append(execute_step(soup, step.get_next()))
+                data_new.append(execute_step(soup_item, step.get_next()))
             else:
                 raise SystemExit('find_all else condition hit')
 
