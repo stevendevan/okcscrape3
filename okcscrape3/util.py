@@ -98,8 +98,6 @@ def execute_step(soup, step, data=None):
     # Found out the hard way that using a mutable default arg value is bad.
     if data is None:
         data = {}
-    else:
-        target = data
 
     step_info = step.get_val()
     action = step_info['action']
@@ -108,9 +106,6 @@ def execute_step(soup, step, data=None):
     name = step_info['name']
     attrs = step_info['attrs']
 
-    if label is not None:
-        data[label] = None
-
     if action == 'find':
         soup_new = soup.find(name=name, attrs=attrs)
         if rtype == 'text':
@@ -118,8 +113,6 @@ def execute_step(soup, step, data=None):
 
         if label is not None:
             data[label] = target
-        else:
-            data = target
 
         if step.has_next():            
             return execute_step(soup_new, step.get_next(), data)
