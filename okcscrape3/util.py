@@ -78,6 +78,8 @@ def extract_data_from_html(html, json_file):
         steps = create_linked_list(instruction_set)
 
         data = execute_step(soup, steps)
+        import ipdb; ipdb.set_trace()  # breakpoint fb1a6fda //
+        thing = 1
 
     """
     soup_base = stuff
@@ -89,7 +91,6 @@ def extract_data_from_html(html, json_file):
                 if 'find_all'
                     soup_temp = soup_temp.find_all(stuff)
     """
-    pass
 
 
 def execute_step(soup, step, data=None):
@@ -101,6 +102,7 @@ def execute_step(soup, step, data=None):
     action = step_info['action']
     label = step_info['label']
     rtype = step_info['rtype']
+    advance_soup = step_info['advance_soup']
     name = step_info['name']
     attrs = step_info['attrs']
 
@@ -116,9 +118,14 @@ def execute_step(soup, step, data=None):
         else:
             data = target
 
-        if step.has_next():            
-            return execute_step(soup_new, step.get_next(), data)
-        else:            
+        if step.has_next():
+            if advance_soup:
+                soup_next = soup_new
+            else:
+                soup_next = soup
+
+            return execute_step(soup_next, step.get_next(), data)
+        else:
             return data
 
     elif action == 'find_all':
@@ -138,6 +145,8 @@ def execute_step(soup, step, data=None):
                 raise SystemExit('find_all else condition hit')
 
             data.append(target)
+
+        return data
 
 
 def create_linked_list(normal_list):
