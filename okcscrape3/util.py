@@ -78,8 +78,6 @@ def extract_data_from_html(html, json_file):
         steps = create_linked_list(instruction_set)
 
         data = execute_step(soup, steps)
-        import ipdb; ipdb.set_trace()  # breakpoint a11bf64a //
-        junk = 1
 
     """
     soup_base = stuff
@@ -110,9 +108,13 @@ def execute_step(soup, step, data=None):
         soup_new = soup.find(name=name, attrs=attrs)
         if rtype == 'text':
             target = soup_new.get_text(strip=True)
+        else:
+            target = None
 
         if label is not None:
             data[label] = target
+        else:
+            data = target
 
         if step.has_next():            
             return execute_step(soup_new, step.get_next(), data)
@@ -122,14 +124,20 @@ def execute_step(soup, step, data=None):
     elif action == 'find_all':
 
         soup_list = soup.find_all(name=name, attrs=attrs)
-        data_new = []
+        # TODO: Is re-defining this variable for every case a good idea?
+        # e.g. it can potentially be a string, list, or dict
+        data = []
         for soup_item in soup_list:
+
+            target = None
             if rtype == 'text':
-                data_new.append(soup_item.text)
+                target = soup_item.get_text(strip=True)
             elif step.has_next():
-                data_new.append(execute_step(soup_item, step.get_next()))
+                target = execute_step(soup_item, step.get_next())
             else:
                 raise SystemExit('find_all else condition hit')
+
+            data.append(target)
 
 
 def create_linked_list(normal_list):
