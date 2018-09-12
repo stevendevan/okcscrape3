@@ -66,31 +66,19 @@ def get_webpage(browser: selenium.webdriver.Chrome,
 
 
 def extract_data_from_html(html, json_file):
-    
+
     with open('D:\_proj\okcscrape3\sandbox\profile_html_targets.json', 'r') as f:
         instructions = json.load(f)
 
     soup = BeautifulSoup(html, 'html.parser')
 
-    #data = {}
+    data = {}
     for instruction_set in instructions:
 
         steps = create_linked_list(instruction_set)
 
-        data = execute_step(soup, steps)
-        import ipdb; ipdb.set_trace()  # breakpoint fb1a6fda //
-        thing = 1
-
-    """
-    soup_base = stuff
-    for instruction_set in instructions_all
-        soup_temp = soup_base
-        for step in instructions_set
-            for soup_temp_item in soup_temp
-                if 'find'
-                if 'find_all'
-                    soup_temp = soup_temp.find_all(stuff)
-    """
+        data_new = execute_step(soup, steps)
+        data.update(data_new)
 
 
 def execute_step(soup, step, data=None):
@@ -133,7 +121,7 @@ def execute_step(soup, step, data=None):
         soup_list = soup.find_all(name=name, attrs=attrs)
         # TODO: Is re-defining this variable for every case a good idea?
         # e.g. it can potentially be a string, list, or dict
-        data = []
+        targets = []
         for soup_item in soup_list:
 
             target = None
@@ -144,7 +132,12 @@ def execute_step(soup, step, data=None):
             else:
                 raise SystemExit('find_all else condition hit')
 
-            data.append(target)
+            targets.append(target)
+
+        if label is not None:
+            data[label] = targets
+        else:
+            data = targets
 
         return data
 
@@ -157,16 +150,6 @@ def create_linked_list(normal_list):
         head_old = head_new
 
     return head_old
-
-
-#class LinkedList(object):
-#    def __init__(self, head=None):
-#        self.head = head
-#
-#    def insert(self, data):
-#        new_node = Node(data)
-#        new_node.set_next(self.head)
-#        self.head = new_node
 
 
 class Node(object):
