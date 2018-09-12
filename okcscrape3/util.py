@@ -66,6 +66,14 @@ def get_webpage(browser: selenium.webdriver.Chrome,
 
 
 def extract_data_from_html(html, json_file):
+    """TODO docstring
+    """
+
+    """Notes
+    This extraction tool now works, but I'm not sure it's a very good solution.
+    The .json format may be a bit difficult to follow, and the 'execute step'
+    function has variable and uncertain return types (list, string, dict, None)
+    """
 
     with open('D:\_proj\okcscrape3\sandbox\profile_html_targets.json', 'r') as f:
         instructions = json.load(f)
