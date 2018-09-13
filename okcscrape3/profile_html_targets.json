@@ -1,131 +1,146 @@
 [
-  {
-    "steps": [
-      {
-        "label": "name",
-        "action": "find",
-        "name": "div",
-        "attrs": {
-          "class": "userinfo2015-basics-username"
-        }
+  [
+    {
+      "label": "name",
+      "action": "find",
+      "rtype": "text",
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "userinfo2015-basics-username"
       }
-    ]
-  },
-  {
-    "steps": [
-      {
-        "label": "age",
-        "action": "find",
-        "name": "span",
-        "attrs": {
-          "class": "userinfo2015-basics-asl-age"
-        }
+    }
+  ],
+  [
+    {
+      "label": "age",
+      "action": "find",
+      "rtype": "text",
+      "advance_soup": true,
+      "name": "span",
+      "attrs": {
+        "class": "userinfo2015-basics-asl-age"
       }
-    ]
-  },
-  {
-    "steps": [
-      {
-        "label": "location",
-        "action": "find",
-        "name": "span",
-        "attrs": {
-          "class": "userinfo2015-basics-asl-location"
-        }
+    }
+  ],
+  [
+    {
+      "label": "location",
+      "action": "find",
+      "rtype": "text",
+      "advance_soup": true,
+      "name": "span",
+      "attrs": {
+        "class": "userinfo2015-basics-asl-location"
       }
-    ]
-  },
-  {
-    "steps": [
-      {
-        "action": "find",
-        "name": "div",
-        "attrs": {
-          "class": "matchprofile-details-section matchprofile-details-section--basics"
-        }
-      },
-      {
-        "label": "basics",
-        "action": "find",
-        "name": "div",
-        "attrs": {
-          "class": "matchprofile-details-text"
-        }
+    }
+  ],
+  [
+    {
+      "action": "find",
+      "label": null,
+      "rtype": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-section matchprofile-details-section--basics"
       }
-    ]
-  },
-  {
-    "steps": [
-      {
-        "action": "find",
-        "name": "div",
-        "attrs": {
-          "class": "matchprofile-details-section matchprofile-details-section--background"
-        }
-      },
-      {
-        "label": "background",
-        "action": "find",
-        "name": "div",
-        "attrs": {
-          "class": "matchprofile-details-text"
-        }
+    },
+    {
+      "label": "basics",
+      "action": "find",
+      "rtype": "text",
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-text"
       }
-    ]
-  },
-  {
-    "steps": [
-      {
-        "action": "find",
-        "name": "div",
-        "attrs": {
-          "class": "matchprofile-details-section matchprofile-details-section--wiw"
-        }
-      },
-      {
-        "label": "what_i_want",
-        "action": "find",
-        "name": "div",
-        "attrs": {
-          "class": "matchprofile-details-text"
-        }
+    }
+  ],
+  [
+    {
+      "action": "find",
+      "label": null,
+      "rtype": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-section matchprofile-details-section--background"
       }
-    ]
-  },
-  {
-    "label": "essays",
-    "steps": [
-      {
-        "action": "find_all",
-        "name": "div",
-        "attrs": {
-          "class": "profile-essay"
-        }
-      },
-      {
-        "label":"category",
-        "action": "find",
-        "name": "h2",
-        "attrs": {
-          "class": "profile-essay-category"
-        }
-      },
-      {
-        "label":"title",
-        "action": "find",
-        "name": "h2",
-        "attrs": {
-          "class": "profile-essay-title"
-        }
-      },
-      {
-        "label":"contents",
-        "action": "find",
-        "name": "p",
-        "attrs": {
-          "class": "profile-essay-contents"
-        }
+    },
+    {
+      "label": "background",
+      "action": "find",
+      "rtype": "text",
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-text"
       }
-    ]
-  }
+    }
+  ],
+  [
+    {
+      "action": "find",
+      "label": null,
+      "rtype": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-section matchprofile-details-section--wiw"
+      }
+    },
+    {
+      "label": "what_i_want",
+      "action": "find",
+      "rtype": "text",
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-text"
+      }
+    }
+  ],
+  [
+    {
+      "label": "essays",
+      "action": "find_all",
+      "rtype": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "profile-essay"
+      }
+    },
+    {
+      "label": "category",
+      "action": "find",
+      "rtype": "text",
+      "advance_soup": false,
+      "name": "h2",
+      "attrs": {
+        "class": "profile-essay-category"
+      }
+    },
+    {
+      "label": "title",
+      "action": "find",
+      "rtype": "text",
+      "advance_soup": false,
+      "name": "h2",
+      "attrs": {
+        "class": "profile-essay-title"
+      }
+    },
+    {
+      "label": "contents",
+      "action": "find",
+      "rtype": "text",
+      "advance_soup": false,
+      "name": "p",
+      "attrs": {
+        "class": "profile-essay-contents"
+      }
+    }
+  ]
 ]
