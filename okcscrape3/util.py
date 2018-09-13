@@ -75,7 +75,7 @@ def extract_data_from_html(html, json_file):
     function has variable and uncertain return types (list, string, dict, None)
     """
 
-    with open('D:\_proj\okcscrape3\sandbox\profile_html_targets.json', 'r') as f:
+    with open(json_file, 'r') as f:
         instructions = json.load(f)
 
     soup = BeautifulSoup(html, 'html.parser')
@@ -98,6 +98,7 @@ def execute_step(soup, step, data=None):
     action = step_info['action']
     label = step_info['label']
     rtype = step_info['rtype']
+    target_attr = step_info['target_attr']
     advance_soup = step_info['advance_soup']
     name = step_info['name']
     attrs = step_info['attrs']
@@ -135,6 +136,8 @@ def execute_step(soup, step, data=None):
             target = None
             if rtype == 'text':
                 target = soup_item.get_text(strip=True)
+            elif rtype == 'attribute':
+                target = soup_item[target_attr]
             elif step.has_next():
                 target = execute_step(soup_item, step.get_next())
             else:
