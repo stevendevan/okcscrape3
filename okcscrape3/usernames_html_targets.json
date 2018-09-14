@@ -1,0 +1,15 @@
+[
+  [
+    {
+      "label": "usernames",
+      "action": "find_all",
+      "rtype": "attribute",
+      "target_attr": "data-userid",
+      "advance_soup": null,
+      "name": "div",
+      "attrs": {
+        "class": "match_card_wrapper user-not-hidden matchcard-user"
+      }
+    }
+  ]
+]
