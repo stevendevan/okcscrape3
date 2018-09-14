@@ -4,6 +4,7 @@
       "label": "name",
       "action": "find",
       "rtype": "text",
+      "target_attr": null,
       "advance_soup": true,
       "name": "div",
       "attrs": {
@@ -16,6 +17,7 @@
       "label": "age",
       "action": "find",
       "rtype": "text",
+      "target_attr": null,
       "advance_soup": true,
       "name": "span",
       "attrs": {
@@ -28,6 +30,7 @@
       "label": "location",
       "action": "find",
       "rtype": "text",
+      "target_attr": null,
       "advance_soup": true,
       "name": "span",
       "attrs": {
@@ -40,6 +43,7 @@
       "action": "find",
       "label": null,
       "rtype": null,
+      "target_attr": null,
       "advance_soup": true,
       "name": "div",
       "attrs": {
@@ -50,6 +54,7 @@
       "label": "basics",
       "action": "find",
       "rtype": "text",
+      "target_attr": null,
       "advance_soup": true,
       "name": "div",
       "attrs": {
@@ -62,6 +67,7 @@
       "action": "find",
       "label": null,
       "rtype": null,
+      "target_attr": null,
       "advance_soup": true,
       "name": "div",
       "attrs": {
@@ -72,6 +78,7 @@
       "label": "background",
       "action": "find",
       "rtype": "text",
+      "target_attr": null,
       "advance_soup": true,
       "name": "div",
       "attrs": {
@@ -84,6 +91,7 @@
       "action": "find",
       "label": null,
       "rtype": null,
+      "target_attr": null,
       "advance_soup": true,
       "name": "div",
       "attrs": {
@@ -94,6 +102,7 @@
       "label": "what_i_want",
       "action": "find",
       "rtype": "text",
+      "target_attr": null,
       "advance_soup": true,
       "name": "div",
       "attrs": {
@@ -106,6 +115,7 @@
       "label": "essays",
       "action": "find_all",
       "rtype": null,
+      "target_attr": null,
       "advance_soup": true,
       "name": "div",
       "attrs": {
@@ -116,6 +126,7 @@
       "label": "category",
       "action": "find",
       "rtype": "text",
+      "target_attr": null,
       "advance_soup": false,
       "name": "h2",
       "attrs": {
@@ -126,6 +137,7 @@
       "label": "title",
       "action": "find",
       "rtype": "text",
+      "target_attr": null,
       "advance_soup": false,
       "name": "h2",
       "attrs": {
@@ -136,6 +148,7 @@
       "label": "contents",
       "action": "find",
       "rtype": "text",
+      "target_attr": null,
       "advance_soup": false,
       "name": "p",
       "attrs": {
