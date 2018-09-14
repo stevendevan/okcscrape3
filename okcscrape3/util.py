@@ -88,6 +88,8 @@ def extract_data_from_html(html, json_file):
         data_new = execute_step(soup, steps)
         data.update(data_new)
 
+    return data
+
 
 def execute_step(soup, step, data=None):
     # Found out the hard way that using a mutable default arg value is bad.
