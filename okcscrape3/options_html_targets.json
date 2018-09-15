@@ -1,0 +1,63 @@
+[
+  [
+    {
+      "label": null,
+      "action": "button",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": null,
+      "name": null,
+      "attrs": null,
+      "selector": "#react-profile-details > div > button:nth-child(1)",
+      "_comment": "basics menu"
+    },
+    {
+      "label": null,
+      "action": "button",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": null,
+      "name": null,
+      "attrs": null,
+      "selector": "#react-profile-details > div > span > div > div > div > div > div > div.reactmodal-contents > div:nth-child(1) > span > fieldset > span > span:nth-child(1) > label > select > option:nth-child(4)",
+      "_comment": "orientation menu"
+    },
+    {
+      "label": null,
+      "action": "find",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "nonbinary-optionField nonbinary-optionField--orientation-tags"
+      },
+      "selector": null,
+      "_comment": "section with orientation options"
+    },
+    {
+      "label": "orientation_options",
+      "action": "find_all",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": null,
+      "name": "button",
+      "attrs": null,
+      "selector": null,
+      "_comment": "orientation options"
+    }
+  ],
+  [
+    {
+      "label": null,
+      "action": "button",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": null,
+      "name": null,
+      "attrs": null,
+      "selector": "#react-profile-details > div > span > div > div > div > div > div > div.reactmodal-contents > div:nth-child(1) > span > fieldset > div > button.nonbinary-buttons.cancelButton > span",
+      "_comment": "orientation cancel button"
+    }
+  ]
+]
