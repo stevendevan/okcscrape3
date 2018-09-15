@@ -9,7 +9,8 @@
       "name": "div",
       "attrs": {
         "class": "match_card_wrapper user-not-hidden matchcard-user"
-      }
+      },
+      "selector": null
     }
   ]
 ]

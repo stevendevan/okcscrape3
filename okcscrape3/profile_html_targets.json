@@ -9,7 +9,8 @@
       "name": "div",
       "attrs": {
         "class": "userinfo2015-basics-username"
-      }
+      },
+      "selector": null
     }
   ],
   [
@@ -22,7 +23,8 @@
       "name": "span",
       "attrs": {
         "class": "userinfo2015-basics-asl-age"
-      }
+      },
+      "selector": null
     }
   ],
   [
@@ -35,7 +37,8 @@
       "name": "span",
       "attrs": {
         "class": "userinfo2015-basics-asl-location"
-      }
+      },
+      "selector": null
     }
   ],
   [
@@ -48,7 +51,8 @@
       "name": "div",
       "attrs": {
         "class": "matchprofile-details-section matchprofile-details-section--basics"
-      }
+      },
+      "selector": null
     },
     {
       "label": "basics",
@@ -59,7 +63,8 @@
       "name": "div",
       "attrs": {
         "class": "matchprofile-details-text"
-      }
+      },
+      "selector": null
     }
   ],
   [
@@ -72,7 +77,8 @@
       "name": "div",
       "attrs": {
         "class": "matchprofile-details-section matchprofile-details-section--background"
-      }
+      },
+      "selector": null
     },
     {
       "label": "background",
@@ -83,7 +89,8 @@
       "name": "div",
       "attrs": {
         "class": "matchprofile-details-text"
-      }
+      },
+      "selector": null
     }
   ],
   [
@@ -96,7 +103,8 @@
       "name": "div",
       "attrs": {
         "class": "matchprofile-details-section matchprofile-details-section--wiw"
-      }
+      },
+      "selector": null
     },
     {
       "label": "what_i_want",
@@ -107,7 +115,8 @@
       "name": "div",
       "attrs": {
         "class": "matchprofile-details-text"
-      }
+      },
+      "selector": null
     }
   ],
   [
@@ -120,7 +129,8 @@
       "name": "div",
       "attrs": {
         "class": "profile-essay"
-      }
+      },
+      "selector": null
     },
     {
       "label": "category",
@@ -131,7 +141,8 @@
       "name": "h2",
       "attrs": {
         "class": "profile-essay-category"
-      }
+      },
+      "selector": null
     },
     {
       "label": "title",
@@ -142,7 +153,8 @@
       "name": "h2",
       "attrs": {
         "class": "profile-essay-title"
-      }
+      },
+      "selector": null
     },
     {
       "label": "contents",
@@ -153,7 +165,8 @@
       "name": "p",
       "attrs": {
         "class": "profile-essay-contents"
-      }
+      },
+      "selector": null
     }
   ]
 ]
