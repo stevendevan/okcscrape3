@@ -65,7 +65,7 @@ def get_webpage(browser: selenium.webdriver.Chrome,
     return browser.page_source
 
 
-def extract_data_from_html(html, json_file):
+def extract_data_from_html(browser, html, json_file):
     """TODO docstring
     """
 
@@ -85,13 +85,14 @@ def extract_data_from_html(html, json_file):
 
         steps = create_linked_list(instruction_set)
 
-        data_new = execute_step(soup, steps)
-        data.update(data_new)
+        data_new = execute_step(browser, soup, steps)
+        if data_new is not None:
+            data.update(data_new)
 
     return data
 
 
-def execute_step(soup, step, data=None):
+def execute_step(browser, soup, step, data=None):
     # Found out the hard way that using a mutable default arg value is bad.
     if data is None:
         data = {}
@@ -104,6 +105,7 @@ def execute_step(soup, step, data=None):
     advance_soup = step_info['advance_soup']
     name = step_info['name']
     attrs = step_info['attrs']
+    selector = step_info['selector']
 
     if action == 'find':
         soup_new = soup.find(name=name, attrs=attrs)
@@ -123,7 +125,7 @@ def execute_step(soup, step, data=None):
             else:
                 soup_next = soup
 
-            return execute_step(soup_next, step.get_next(), data)
+            return execute_step(browser, soup_next, step.get_next(), data)
         else:
             return data
 
@@ -141,7 +143,7 @@ def execute_step(soup, step, data=None):
             elif rtype == 'attribute':
                 target = soup_item[target_attr]
             elif step.has_next():
-                target = execute_step(soup_item, step.get_next())
+                target = execute_step(browser, soup_item, step.get_next())
             else:
                 raise SystemExit('find_all else condition hit')
 
@@ -153,6 +155,19 @@ def execute_step(soup, step, data=None):
             data = targets
 
         return data
+
+    elif action == 'button':
+        button = browser.find_element_by_css_selector(selector)
+        button.click()
+
+        html = browser.page_source
+        soup = BeautifulSoup(html, 'html.parser')
+
+        if step.has_next():
+            return execute_step(browser, soup, step.get_next(), data)
+
+    else:
+        print('Invalid action: {}'.format(action))
 
 
 def create_linked_list(normal_list):
