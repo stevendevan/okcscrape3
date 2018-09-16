@@ -110,7 +110,7 @@ def execute_step(browser, soup, step, data=None):
     if action == 'find':
         soup_new = soup.find(name=name, attrs=attrs)
         if rtype == 'text':
-            target = soup_new.get_text(strip=True)
+            target = get_text_from_soup(soup_new)
         else:
             target = None
 
@@ -134,12 +134,12 @@ def execute_step(browser, soup, step, data=None):
         soup_list = soup.find_all(name=name, attrs=attrs)
         # TODO: Is re-defining this variable for every case a good idea?
         # e.g. it can potentially be a string, list, or dict
-        targets = []
+        target_list = []
         for soup_item in soup_list:
 
             target = None
             if rtype == 'text':
-                target = soup_item.get_text(strip=True)
+                target = get_text_from_soup(soup_item)
             elif rtype == 'attribute':
                 target = soup_item[target_attr]
             elif step.has_next():
@@ -147,12 +147,13 @@ def execute_step(browser, soup, step, data=None):
             else:
                 raise SystemExit('find_all else condition hit')
 
-            targets.append(target)
+            if target is not None:
+                target_list.append(target)
 
         if label is not None:
-            data[label] = targets
+            data[label] = target_list
         else:
-            data = targets
+            data = target_list
 
         return data
 
@@ -168,6 +169,19 @@ def execute_step(browser, soup, step, data=None):
 
     else:
         print('Invalid action: {}'.format(action))
+
+
+def get_text_from_soup(soup):
+    # Strip leading and trailing spaces
+    text = soup.get_text(strip=True)
+
+    # Skip if the keyword consists of all punctuation, e.g. '-'
+    if not any(map(lambda char: char.isalnum(), text)):
+        return None
+
+    text_lowercase = text.lower()
+
+    return text_lowercase
 
 
 def create_linked_list(normal_list):
