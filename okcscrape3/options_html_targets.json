@@ -59,5 +59,55 @@
       "selector": "#react-profile-details > div > span > div > div > div > div > div > div.reactmodal-contents > div:nth-child(1) > span > fieldset > div > button.nonbinary-buttons.cancelButton > span",
       "_comment": "orientation cancel button"
     }
+  ],
+  [
+    {
+      "label": null,
+      "action": "button",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": null,
+      "name": null,
+      "attrs": null,
+      "selector": "#react-profile-details > div > span > div > div > div > div > div > div.reactmodal-contents > div:nth-child(1) > span > fieldset > span > span:nth-child(2) > span > button",
+      "_comment": "gender menu"
+    },
+    {
+      "label": null,
+      "action": "find",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "nonbinary-optionField-tags"
+      },
+      "selector": null,
+      "_comment": "section with gender options"
+    },
+    {
+      "label": "gender_options",
+      "action": "find_all",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": null,
+      "name": "button",
+      "attrs": null,
+      "selector": null,
+      "_comment": "gender options"
+    }
+  ],
+  [
+    {
+      "label": null,
+      "action": "button",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": null,
+      "name": null,
+      "attrs": null,
+      "selector": "#react-profile-details > div > span > div > div > div > div > div > div.reactmodal-contents > div:nth-child(1) > span > fieldset > div > button.nonbinary-buttons.cancelButton",
+      "_comment": "gender cancel button"
+    }
   ]
 ]
