@@ -109,5 +109,31 @@
       "selector": "#react-profile-details > div > span > div > div > div > div > div > div.reactmodal-contents > div:nth-child(1) > span > fieldset > div > button.nonbinary-buttons.cancelButton",
       "_comment": "gender cancel button"
     }
+  ],
+  [
+    {
+      "label": null,
+      "action": "find",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "select",
+      "attrs": {
+        "name": "status"
+      },
+      "selector": null,
+      "_comment": "section with relationship status options"
+    },
+    {
+      "label": "rel_status_options",
+      "action": "find_all",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": false,
+      "name": "option",
+      "attrs": null,
+      "selector": null,
+      "_comment": "relationship status options"
+    }
   ]
 ]
