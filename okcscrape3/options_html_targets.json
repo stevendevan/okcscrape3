@@ -161,5 +161,31 @@
       "selector": null,
       "_comment": "monogamous options"
     }
+  ],
+  [
+    {
+      "label": null,
+      "action": "find",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "select",
+      "attrs": {
+        "name": "bodytype"
+      },
+      "selector": null,
+      "_comment": "section with bodytype options"
+    },
+    {
+      "label": "bodytype_options",
+      "action": "find_all",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": null,
+      "name": "option",
+      "attrs": null,
+      "selector": null,
+      "_comment": "bodytype options"
+    }
   ]
 ]
