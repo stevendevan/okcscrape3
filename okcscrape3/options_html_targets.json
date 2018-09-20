@@ -135,5 +135,31 @@
       "selector": null,
       "_comment": "relationship status options"
     }
+  ],
+  [
+    {
+      "label": null,
+      "action": "find",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "select",
+      "attrs": {
+        "name": "monogamous"
+      },
+      "selector": null,
+      "_comment": "section with monogamous options"
+    },
+    {
+      "label": "monogamous_options",
+      "action": "find_all",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": null,
+      "name": "option",
+      "attrs": null,
+      "selector": null,
+      "_comment": "monogamous options"
+    }
   ]
 ]
