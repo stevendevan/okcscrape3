@@ -85,17 +85,21 @@ def extract_data_from_html(browser, html, json_file):
 
         steps = create_linked_list(instruction_set)
 
-        data_new = execute_step(browser, soup, steps)
+        data_new = execute_step(browser, steps)
         if data_new is not None:
             data.update(data_new)
 
     return data
 
 
-def execute_step(browser, soup, step, data=None):
+def execute_step(browser, step, soup=None, data=None):
+
     # Found out the hard way that using a mutable default arg value is bad.
     if data is None:
         data = {}
+
+    if soup is None:
+        soup = BeautifulSoup(browser.page_source, 'html.parser')
 
     step_info = step.get_val()
     action = step_info['action']
@@ -108,6 +112,7 @@ def execute_step(browser, soup, step, data=None):
     selector = step_info['selector']
 
     if action == 'find':
+
         soup_new = soup.find(name=name, attrs=attrs)
         if rtype == 'text':
             target = get_text_from_soup(soup_new)
@@ -125,7 +130,7 @@ def execute_step(browser, soup, step, data=None):
             else:
                 soup_next = soup
 
-            return execute_step(browser, soup_next, step.get_next(), data)
+            return execute_step(browser, step.get_next(), soup_next, data)
         else:
             return data
 
@@ -143,7 +148,7 @@ def execute_step(browser, soup, step, data=None):
             elif rtype == 'attribute':
                 target = soup_item[target_attr]
             elif step.has_next():
-                target = execute_step(browser, soup_item, step.get_next())
+                target = execute_step(browser, step.get_next(), soup_item)
             else:
                 raise SystemExit('find_all else condition hit')
 
@@ -165,7 +170,7 @@ def execute_step(browser, soup, step, data=None):
         soup = BeautifulSoup(html, 'html.parser')
 
         if step.has_next():
-            return execute_step(browser, soup, step.get_next(), data)
+            return execute_step(browser, step.get_next(), soup, data)
 
     else:
         print('Invalid action: {}'.format(action))
