@@ -187,5 +187,174 @@
       "selector": null,
       "_comment": "bodytype options"
     }
+  ],
+  [
+    {
+      "label": null,
+      "action": "button",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": null,
+      "name": null,
+      "attrs": null,
+      "selector": "#react-profile-details > div > span > div > div > div > div > div > div.reactmodal-contents > fieldset > button.flatbutton.big.clear.light-bg",
+      "_comment": "basics cancel button"
+    }
+  ],
+  [
+    {
+      "label": null,
+      "action": "button",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": null,
+      "name": null,
+      "attrs": null,
+      "selector": "#react-profile-details > div > button:nth-child(2)",
+      "_comment": "background menu button"
+    },
+    {
+      "label": "ethnicity_options",
+      "action": "find_all",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": null,
+      "name": "span",
+      "attrs": {
+        "class": "oknf-checkbox-label"
+      },
+      "selector": null,
+      "_comment": "section with ethnicity options"
+    }
+  ],
+  [
+    {
+      "label": null,
+      "action": "find",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "select",
+      "attrs": {
+        "name": "language-0"
+      },
+      "selector": null,
+      "_comment": "section with language options"
+    },
+    {
+      "label": "language_options",
+      "action": "find_all",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": null,
+      "name": "option",
+      "attrs": null,
+      "selector": null,
+      "_comment": "language options"
+    }
+  ],
+  [
+    {
+      "label": null,
+      "action": "find",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "select",
+      "attrs": {
+        "name": "education.modifier"
+      },
+      "selector": null,
+      "_comment": "section with education modifier options"
+    },
+    {
+      "label": "education_modifier_options",
+      "action": "find_all",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": null,
+      "name": "option",
+      "attrs": null,
+      "selector": null,
+      "_comment": "education modifier options"
+    }
+  ],
+  [
+    {
+      "label": null,
+      "action": "find",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "select",
+      "attrs": {
+        "name": "education.value"
+      },
+      "selector": null,
+      "_comment": "section with education options"
+    },
+    {
+      "label": "education_options",
+      "action": "find_all",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": null,
+      "name": "option",
+      "attrs": null,
+      "selector": null,
+      "_comment": "education options"
+    }
+  ],
+  [
+    {
+      "label": null,
+      "action": "find",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "select",
+      "attrs": {
+        "name": "religion.value"
+      },
+      "selector": null,
+      "_comment": "section with religion options"
+    },
+    {
+      "label": "religion_options",
+      "action": "find_all",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": null,
+      "name": "option",
+      "attrs": null,
+      "selector": null,
+      "_comment": "religion options"
+    }
+  ],
+  [
+    {
+      "label": null,
+      "action": "find",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "select",
+      "attrs": {
+        "name": "religion.modifier"
+      },
+      "selector": null,
+      "_comment": "section with religion modifier options"
+    },
+    {
+      "label": "religion_modifier_options",
+      "action": "find_all",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": null,
+      "name": "option",
+      "attrs": null,
+      "selector": null,
+      "_comment": "religion modifier options"
+    }
   ]
 ]
