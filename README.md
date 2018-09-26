@@ -66,7 +66,7 @@ The ```findusers``` subroutine will launch a Selenium Chromedriver instance and 
 
 >```okcscrape3 <args> fetchusers <args>```
   
-The ```fetchusers``` subroutine will launch a Selenium Chromedriver instance, navigate to profiles using the usernames gathered by ```findusers```, and grab the profile contents. You must provide the package with a ```cookies.json```, because in order to access other user's profiles, the Chromedriver instance must be "logged in". The profile data is stored in a #TODO.
+The ```fetchusers``` subroutine will launch a Selenium Chromedriver instance, navigate to profiles using the usernames gathered by ```findusers```, and grab the profile contents. You must provide the package with a ```cookies.json```, because in order to access other user's profiles, the Chromedriver instance must be "logged in". The profile data is stored in a JSON as a list of dicts.
 
 >```okcscrape3 <args> print-config```
   
