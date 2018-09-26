@@ -16,8 +16,8 @@ def print_test_json():
     print(result)
 
 
-def write_stuff_to_json(stuff, json_file):
-    if stuff is None:
+def append_to_json(data, json_file):
+    if data is None:
         return
 
     with open(json_file, 'a') as file:
@@ -34,7 +34,7 @@ def write_stuff_to_json(stuff, json_file):
         if not empty_file:
             file.write(',')
 
-        json.dump(stuff, file)
+        json.dump(data, file)
         file.write(']')
 
 
@@ -49,7 +49,7 @@ def main():
         pass
 
     for item in data:
-        write_stuff_to_json(item, json_test_file)
+        append_to_json(item, json_test_file)
 
     with open(json_test_file, 'r') as file:
         result = json.load(file)
