@@ -1,0 +1,136 @@
+[
+  {
+    "action": "button",
+    "selector": "#react-profile-details > div > button:nth-child(1)",
+    "comment": "basics menu"
+  },
+  {
+    "action": "button",
+    "selector": "#react-profile-details > div > span > div > div > div > div > div > div.reactmodal-contents > div:nth-child(1) > span > fieldset > span > span:nth-child(1) > label > select > option:nth-child(4)",
+    "comment": "orientation menu"
+  },
+  {
+    "action": "find",
+    "name": "div",
+    "attrs": {
+      "class": "nonbinary-optionField nonbinary-optionField--orientation-tags"
+    },
+    "comment": "section with orientation options"
+  },
+  {
+    "action": "find_all",
+    "name": "button",
+    "attrs": null,
+    "label": "orientation_options",
+    "comment": "orientation options"
+  },
+  {
+    "action": "button",
+    "selector": "#react-profile-details > div > span > div > div > div > div > div > div.reactmodal-contents > div:nth-child(1) > span > fieldset > div > button.nonbinary-buttons.cancelButton > span",
+    "comment": "orientation cancel button"
+  },
+  {
+    "action": "button",
+    "selector": "#react-profile-details > div > span > div > div > div > div > div > div.reactmodal-contents > div:nth-child(1) > span > fieldset > span > span:nth-child(2) > span > button",
+    "comment": "gender menu"
+  },
+  {
+    "action": "find",
+    "name": "div",
+    "attrs": {
+      "class": "nonbinary-optionField-tags"
+    },
+    "comment": "section with gender options"
+  },
+  {
+    "action": "find_all",
+    "name": "button",
+    "attrs": null,
+    "label": "gender_options",
+    "comment": "gender options"
+  },
+  {
+    "action": "button",
+    "selector": "#react-profile-details > div > span > div > div > div > div > div > div.reactmodal-contents > div:nth-child(1) > span > fieldset > div > button.nonbinary-buttons.cancelButton",
+    "comment": "gender cancel button"
+  },
+  {
+    "action": "find",
+    "name": "select",
+    "attrs": {
+      "name": "status"
+    },
+    "comment": "section with relationship status options"
+  },
+  {
+    "action": "find_all",
+    "name": "option",
+    "attrs": null,
+    "label": "rel_status_options",
+    "comment": "relationship status options"
+  },
+  {
+    "action": "find",
+    "name": "select",
+    "attrs": {
+      "name": "monogamous"
+    },
+    "comment": ""
+  },
+  {
+    "action": "find_all",
+    "name": "option",
+    "attrs": null,
+    "label": "monogamous_options",
+    "comment": "monogamous options"
+  },
+  {
+    "action": "find",
+    "name": "select",
+    "attrs": {
+      "name": "bodytype"
+    },
+    "comment": "section with relationship status options"
+  },
+  {
+    "action": "find_all",
+    "name": "option",
+    "attrs": null,
+    "label": "bodytype_options",
+    "comment": "bodytype options"
+  },
+  {
+    "action": "button",
+    "selector": "#react-profile-details > div > span > div > div > div > div > div > div.reactmodal-contents > fieldset > button.flatbutton.big.clear.light-bg",
+    "comment": "basics cancel button"
+  },
+  {
+    "action": "button",
+    "selector": "#react-profile-details > div > button:nth-child(2)",
+    "comment": "background menu button"
+  },
+  {
+    "action": "find_all",
+    "name": "span",
+    "attrs": {
+      "class": "oknf-checkbox-label"
+    },
+    "label": "ethnicity_options",
+    "comment": "ethnicity options"
+  },
+  {
+    "action": "find",
+    "name": "select",
+    "attrs": {
+      "name": "language-0"
+    },
+    "comment": "section with language options"
+  },
+  {
+    "action": "find_all",
+    "name": "option",
+    "attrs": null,
+    "label": "language_options",
+    "comment": "language options"
+  }
+]

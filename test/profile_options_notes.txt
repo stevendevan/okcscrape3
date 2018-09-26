@@ -1,0 +1,3 @@
+Basics
+monogamous and bodytype have a dash at the start that needs to be removed
+bodytype options have underscores that need to be replaced with spaces
