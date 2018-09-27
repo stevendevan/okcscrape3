@@ -4,11 +4,13 @@ media/
 *.bat
 !install.bat
 test_module/
-cookies.json
+cookies.*
 chromedriver.exe
 data/
 generate_arg_json.py
 clarg_structure.txt
+
+
 
 
 # Byte-compiled / optimized / DLL files

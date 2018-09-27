@@ -1,0 +1,159 @@
+[
+  [
+    {
+      "label": "name",
+      "action": "find",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "userinfo2015-basics-username"
+      }
+    }
+  ],
+  [
+    {
+      "label": "age",
+      "action": "find",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "span",
+      "attrs": {
+        "class": "userinfo2015-basics-asl-age"
+      }
+    }
+  ],
+  [
+    {
+      "label": "location",
+      "action": "find",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "span",
+      "attrs": {
+        "class": "userinfo2015-basics-asl-location"
+      }
+    }
+  ],
+  [
+    {
+      "action": "find",
+      "label": null,
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-section matchprofile-details-section--basics"
+      }
+    },
+    {
+      "label": "basics",
+      "action": "find",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-text"
+      }
+    }
+  ],
+  [
+    {
+      "action": "find",
+      "label": null,
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-section matchprofile-details-section--background"
+      }
+    },
+    {
+      "label": "background",
+      "action": "find",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-text"
+      }
+    }
+  ],
+  [
+    {
+      "action": "find",
+      "label": null,
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-section matchprofile-details-section--wiw"
+      }
+    },
+    {
+      "label": "what_i_want",
+      "action": "find",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "matchprofile-details-text"
+      }
+    }
+  ],
+  [
+    {
+      "label": "essays",
+      "action": "find_all",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "div",
+      "attrs": {
+        "class": "profile-essay"
+      }
+    },
+    {
+      "label": "category",
+      "action": "find",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": false,
+      "name": "h2",
+      "attrs": {
+        "class": "profile-essay-category"
+      }
+    },
+    {
+      "label": "title",
+      "action": "find",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": false,
+      "name": "h2",
+      "attrs": {
+        "class": "profile-essay-title"
+      }
+    },
+    {
+      "label": "contents",
+      "action": "find",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": false,
+      "name": "p",
+      "attrs": {
+        "class": "profile-essay-contents"
+      }
+    }
+  ]
+]
