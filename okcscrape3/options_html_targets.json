@@ -356,5 +356,55 @@
       "selector": null,
       "_comment": "religion modifier options"
     }
+  ],
+  [
+    {
+      "label": null,
+      "action": "button",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": null,
+      "name": null,
+      "attrs": null,
+      "selector": "#react-profile-details > div > span > div > div > div > div > div > div.reactmodal-contents > fieldset > button.flatbutton.big.clear.light-bg",
+      "_comment": "background cancel button"
+    }
+  ],
+  [
+    {
+      "label": null,
+      "action": "button",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": null,
+      "name": null,
+      "attrs": null,
+      "selector": "#react-profile-details > div > button:nth-child(3)",
+      "_comment": "misc section button"
+    },
+    {
+      "label": null,
+      "action": "find",
+      "rtype": null,
+      "target_attr": null,
+      "advance_soup": true,
+      "name": "select",
+      "attrs": {
+        "name": "smoking"
+      },
+      "selector": null,
+      "_comment": "section with smoking options"
+    },
+    {
+      "label": "smoking_options",
+      "action": "find_all",
+      "rtype": "text",
+      "target_attr": null,
+      "advance_soup": null,
+      "name": "option",
+      "attrs": null,
+      "selector": null,
+      "_comment": "smoking options"
+    }
   ]
 ]
