@@ -93,10 +93,9 @@ def extract_usernames_from_html(html: str) -> list:
     """
     soup = BeautifulSoup(html, 'html.parser')
     match_cards = soup.find_all(name='div',
-                                attrs={'class': 'match_card_wrapper ' +
-                                       'user-not-hidden matchcard-user'})
+                                attrs={'class': 'usercard-thumb'})
     usernames = []
     for match_card in match_cards:
-        usernames.append(match_card['data-userid'])
+        usernames.append(match_card['data-username'])
 
     return usernames
