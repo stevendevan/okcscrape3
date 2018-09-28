@@ -15,6 +15,7 @@ def findusers(usernames_outfile: str,
               webdriver_path: str,
               base_url: str,
               match_url_suffix: str,
+              cookies_file: str,
               num_usernames: int,
               time_between_queries: int,
               max_query_attempts: int) -> None:
@@ -46,7 +47,8 @@ def findusers(usernames_outfile: str,
 
         usernames_list = []
 
-    browser = util.initialize_webdriver(webdriver_path)
+    browser = util.initialize_webdriver(webdriver_path,
+                                        cookies_file=cookies_file)
     url = base_url + match_url_suffix
 
     num_found_users = 0
