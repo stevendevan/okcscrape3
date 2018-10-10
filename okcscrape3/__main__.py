@@ -44,6 +44,11 @@ def main():
                         help='Time in seconds to sleep between each webpage '
                              'request. This is to avoid '
                              'throttling/blacklisting by OKC servers.')
+    parser.add_argument('--cookies-file',
+                        default=configs['global']['cookies_file'],
+                        help='Name or absolute path to the .json file '
+                             'containing the OKC cookies (credentials) '
+                             'necessary to view user profiles.')
     parser.add_argument('--max-query-attempts',
                         type=int,
                         default=configs['global']['max_query_attempts'],
@@ -82,11 +87,6 @@ def main():
                                               'navigate to each user\'s '
                                               'profile and log the contents '
                                               'in a csv.')
-    parser_fetch.add_argument('--cookies-file',
-                              default=configs['fetchusers']['cookies_file'],
-                              help='Name or absolute path to the .json file '
-                                   'containing the OKC cookies (credentials) '
-                                   'necessary to view user profiles.')
     parser_fetch.add_argument('--usernames-file',
                               default=configs['fetchusers']['usernames_file'],
                               help=('Name or absolute path of a usernames csv '
@@ -121,6 +121,7 @@ def main():
     time_between_queries = args_obj['time_between_queries']
     max_query_attempts = args_obj['max_query_attempts']
     save_configs = args_obj['save_configs']
+    cookies_file = os.path.join(pkg_root_path, args_obj['cookies_file'])
 
     if save_configs:
         _save_configs(configs, config_path, args_obj)
@@ -139,6 +140,7 @@ def main():
 
         findusers(webdriver_path=webdriver_path,
                   base_url=base_url,
+                  cookies_file=cookies_file,
                   time_between_queries=time_between_queries,
                   max_query_attempts=max_query_attempts,
 
@@ -148,8 +150,6 @@ def main():
 
     elif args_obj['subroutine'] == 'fetchusers':
 
-        cookies_file = os.path.join(pkg_root_path,
-                                    args_obj['cookies_file'])
         usernames_file = os.path.join(pkg_root_path,
                                       args_obj['usernames_file'])
         profiles_outfile = os.path.join(pkg_root_path,
@@ -161,10 +161,10 @@ def main():
 
         fetchusers(webdriver_path=webdriver_path,
                    base_url=base_url,
+                   cookies_file=cookies_file,
                    time_between_queries=time_between_queries,
                    max_query_attempts=max_query_attempts,
 
-                   cookies_file=cookies_file,
                    usernames_file=usernames_file,
                    profiles_outfile=profiles_outfile,
                    num_profiles=num_profiles,
