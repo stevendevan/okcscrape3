@@ -1,5 +1,9 @@
 # okcscrape3
 (**okc**upid **scrape**r in Python **3**)
+
+## Notice:
+I've stopped working on this since OKC changes their html structure so much and I got a job so fuggit.
+
 ## What it does
 Scrape and log usernames and profile text content from the popular dating website OKCupid.
 
